@@ -11,7 +11,7 @@
 
 <body onload="init()">
     <header>
-        <img class="logo" src="img/LOGO.png" alt="">
+        <img class="logo" src="img/LOGO.png" onclick="openGallery()" alt="">
         <ul>
             <li>Gallery</li>
             <li>Memes</li>
@@ -20,12 +20,30 @@
     </header>
 
     <main>
-        <img height="200px" src="img/1.jpg" alt="" onclick="drawImg(this)">
-        <img height="200px" src="img/2.jpg" alt="" onclick="drawImg(this)">
-        <div class="canvas-container">
-            <canvas class="canvas"></canvas>
+        <div class="imgs-container"></div>
+        <div class="editor-container flex hide">
+            <div class="canvas-container">
+                <canvas class="canvas"></canvas>
+            </div>
+            <div class="editor">
+                <input class="text-line" type="text" oninput="setTextIngMeme(this.value)">
+                <button class="btn">
+                    <img class="icon" src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt="">
+                </button>
+                <button class="btn" onclick="addLine()">
+                    <img class="icon" src="img/ICONS/add.png" alt="">
+                </button>
+                <button class="btn">
+                    <img class="icon" src="img/ICONS/trash.png" alt="">
+                </button>
+                <button class="btn" onclick="increaseFont()">
+                    <img class="icon" src="img/ICONS/increase font-icon.png" alt="">
+                </button>
+                <button class="btn" onclick="decreaseFont()">
+                    <img class="icon" src="img/ICONS/decrease font-icon.png" alt="">
+                </button>
+            </div>
         </div>
-        <input type="text" oninput="writeText(this.value)">
     </main>
 
     <script src="js/memegen-localstorge.js"></script>
