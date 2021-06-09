@@ -6,14 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/memegen.css">
-    <title>Document</title>
+    <title>MemeGen</title>
 </head>
 
-<body>
+<body onload="init()">
+    <header>
+        <img class="logo" src="img/LOGO.png" alt="">
+        <ul>
+            <li>Gallery</li>
+            <li>Memes</li>
+            <li>About</li>
+        </ul>
+    </header>
 
+    <main>
+        <img height="200px" src="img/1.jpg" alt="" onclick="drawImg(this)">
+        <img height="200px" src="img/2.jpg" alt="" onclick="drawImg(this)">
+        <div class="canvas-container">
+            <canvas class="canvas"></canvas>
+        </div>
+        <input type="text" oninput="writeText(this.value)">
+    </main>
 
     <script src="js/memegen-localstorge.js"></script>
-    <script src="js/memegen-service.js"></script>
+    <script src="js/meme-service.js"></script>
     <script src="js/memegen.js"></script>
 </body>
 

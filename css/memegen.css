@@ -1,0 +1,47 @@
+/* Bace */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    height: 100px;
+    background-color: rgb(252, 73, 73);
+    border-bottom: 10px solid rgb(0, 0, 0);
+    display: flex;
+}
+
+.logo {
+    height: 40px;
+}
+
+main {
+    display: flex;
+}
+
+.canvas-container {
+    margin: 0 20px 0 50px;
+    height: 80vh;
+    width: 50vw;
+}
+
+canvas {
+    border: 5px solid gray;
+}
+
+input {
+    height: 25px;
+}
