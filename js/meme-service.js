@@ -7,23 +7,28 @@ var gId = 0;
 
 function UpdateMeme(elImg) {
     gMeme = {
-        selectedImgId: 5,
+        selectedImgId: elImg.dataset.id,
         selectedLineIdx: 0,
         elImg,
         lines: [{
-            txt: '',
+            text: '',
             size: 50,
             align: 'center',
             color: 'white',
             x: elImg.width / 2,
-            y: 50
+            y: 50,
+            rectSize: {
+                pos: { x: 20, y: 3 },
+                height: 65,
+                width: elImg.width - 40
+            }
         }]
     }
 }
 
-function getPosXToWrite() {
+function getPosXToWrite(lineIdx) {
     var xPos;
-    switch (gMeme.lines[gMeme.selectedLineIdx].align) {
+    switch (gMeme.lines[lineIdx].align) {
         case 'start':
             {
                 xPos = 50;
@@ -71,29 +76,35 @@ function setTextIngMeme(text) {
     writeText(gMeme.selectedLineIdx);
 }
 
-function increaseFont() {
-    gMeme.lines[gMeme.selectedLineIdx].size += 2;
-    writeText()
+function changeSize(deff) {
+    gMeme.lines[gMeme.selectedLineIdx].size += deff;
+    writeText(gMeme.selectedLineIdx)
 }
 
-function decreaseFont() {
-    gMeme.lines[gMeme.selectedLineIdx].size -= 2;
-    writeText()
+function changeAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].align = align;
+    writeText(gMeme.selectedLineIdx)
 }
 
-function addLineTogMeme() {
+function addLineTogMeme(isEmptyLines) {
     var elImg = gMeme.elImg;
     var elCanvas = getgElCanvas();
     var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
+    if (gMeme.lines.length === 0) yPos = 50;
     gMeme.lines.push({
-        txt: '',
+        text: '',
         size: 50,
         align: 'center',
         color: 'white',
         x: elImg.width / 2,
-        y: yPos
+        y: yPos,
+        rectSize: {
+            pos: { x: 20, y: yPos - 50 + 3 },
+            height: 65,
+            width: elImg.width - 40
+        }
     })
-    gMeme.selectedLineIdx++;
+    if (!isEmptyLines) gMeme.selectedLineIdx++;
 }
 
 function _createImg(keywords) {

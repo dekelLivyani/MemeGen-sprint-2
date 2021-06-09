@@ -24,17 +24,32 @@ button {
     display: flex;
 }
 
+.align-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
 header {
     height: 6.25rem;
     background-color: rgb(252, 73, 73);
     border-bottom: 0.625rem solid rgb(0, 0, 0);
-    display: flex;
     position: fixed;
     top: 0;
     width: 100%;
-    align-items: center;
-    justify-content: space-between;
     padding: 0 2rem;
+}
+
+nav ul {
+    font-size: 1.7rem;
+    gap: 15px;
+}
+
+nav ul li {
+    font-family: cursive;
+    cursor: pointer;
 }
 
 .logo {
@@ -43,14 +58,12 @@ header {
 }
 
 main {
-    display: flex;
     margin-top: 7rem;
 }
 
 .imgs-container {
     width: 90vw;
     margin: 0 auto;
-    display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
 }
