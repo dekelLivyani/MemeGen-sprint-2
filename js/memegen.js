@@ -9,7 +9,49 @@ function init() {
     gElCanvas = document.querySelector('.canvas');
     gCtx = gElCanvas.getContext('2d')
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    addListeners();
+}
+
+function addListeners() {
+    addMouseListeners();
+    // addTouchListeners();
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        renderCanvas();
+    })
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('click', onClickCanvas);
+    // gElCanvas.addEventListener('mousemove', onMove)
+    // gElCanvas.addEventListener('mousedown', onDown)
+    // gElCanvas.addEventListener('mouseup', onUp)
+}
+
+// function addTouchListeners() {
+//     gElCanvas.addEventListener('touchmove', onMove)
+//     gElCanvas.addEventListener('touchstart', onDown)
+//     gElCanvas.addEventListener('touchend', onUp)
+// }
+
+function onClickCanvas(ev) {
+    var meme = getgMeme();
+    if (meme.lines.length === 1 && meme.lines[0].text === '') return;
+    const lineClicked = meme.lines.find(line =>
+        ev.offsetX > line.rectSize.pos.x &&
+        ev.offsetX < (line.rectSize.pos.x + line.rectSize.width) &&
+        ev.offsetY > line.rectSize.pos.y &&
+        ev.offsetY < (line.rectSize.pos.y + line.rectSize.height)
+    )
+    if (lineClicked) {
+        const idxLine = meme.lines.findIndex(line =>
+            line === lineClicked
+        )
+        document.querySelector('.text-line').value = lineClicked.text;
+        renderCanvas();
+        drawRect(lineClicked);
+        meme.selectedLineIdx = idxLine;
+    }
 }
 
 function renderImgs() {
@@ -44,14 +86,14 @@ function drawImg(elImg) {
         return;
     }
     for (var i = 0; i < meme.lines.length; i++) {
-        writeText(i, false);
+        writeText(i, true);
     }
 }
 
-function writeText(lineIdx, isWriteNow = true) {
+function writeText(lineIdx, isBackUpTexted = false) {
     var meme = getgMeme();
     var memeLine = meme.lines[lineIdx];
-    if (isWriteNow) {
+    if (!isBackUpTexted) {
         renderCanvas();
         drawRect(memeLine);
     }
@@ -67,16 +109,18 @@ function writeText(lineIdx, isWriteNow = true) {
 
 function drawRect(memeLine) {
     gCtx.beginPath()
-    gCtx.rect(20, memeLine.y - memeLine.size + 3, gElCanvas.width - 40, memeLine.size + 15);
+    gCtx.rect(20, memeLine.y - memeLine.size + 3, gElCanvas.width - 40, memeLine.size + 7);
     gCtx.strokeStyle = 'red'
     gCtx.stroke()
 }
 
 function MoveLine(deff) {
     var meme = getgMeme();
+    if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     var lineNum = meme.selectedLineIdx;
     var currLine = meme.lines[lineNum];
     currLine.y += deff;
+    currLine.rectSize.pos.y += deff;
     writeText(lineNum);
 }
 
@@ -89,13 +133,20 @@ function addLine() {
 function trashLine() {
     document.querySelector('.text-line').value = '';
     var meme = getgMeme();
+    if (meme.lines.length === 1 && meme.lines[0].text === '') return;
 
-    var currlineIdx = meme.selectedLineIdx; //1
-    meme.lines.splice(currlineIdx, 1); // 0
+    var currlineIdx = meme.selectedLineIdx;
+    meme.lines.splice(currlineIdx, 1);
     if (meme.lines.length) {
         renderCanvas()
-        drawRect(meme.lines[currlineIdx - 1])
-        meme.selectedLineIdx = currlineIdx - 1;
+        if (currlineIdx) {
+            drawRect(meme.lines[currlineIdx - 1])
+            meme.selectedLineIdx = currlineIdx - 1;
+        } else {
+            drawRect(meme.lines[0])
+            meme.selectedLineIdx = 0;
+        }
+
     } else {
         addLineTogMeme(true); //true = if is line empty
         renderCanvas()
@@ -104,6 +155,7 @@ function trashLine() {
 
 function switchLine() {
     var meme = getgMeme();
+    if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     var currlineNum = meme.selectedLineIdx;
     var nextLineNum;
     var nextTextLine;
@@ -122,6 +174,14 @@ function switchLine() {
     writeText(nextLineNum);
     gMeme.selectedLineIdx = nextLineNum;
 }
+
+function changeColor() {
+    var elColor = document.querySelector('.color-input');
+    gMeme.lines[gMeme.selectedLineIdx].color = elColor.value;
+    renderCanvas();
+}
+
+//switch between gallery and editor 
 
 function openEditor() {
     var elEditor = document.querySelector('.editor-container');

@@ -77,13 +77,23 @@ function setTextIngMeme(text) {
 }
 
 function changeSize(deff) {
+    if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     gMeme.lines[gMeme.selectedLineIdx].size += deff;
+    gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
+    gMeme.lines[gMeme.selectedLineIdx].rectSize.height += deff;
     writeText(gMeme.selectedLineIdx)
 }
 
 function changeAlign(align) {
+    if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     gMeme.lines[gMeme.selectedLineIdx].align = align;
     writeText(gMeme.selectedLineIdx)
+}
+
+function clickChangeColor() {
+    var elColor = document.querySelector('.color-input');
+    elColor.click();
+
 }
 
 function addLineTogMeme(isEmptyLines) {
@@ -104,7 +114,7 @@ function addLineTogMeme(isEmptyLines) {
             width: elImg.width - 40
         }
     })
-    if (!isEmptyLines) gMeme.selectedLineIdx++;
+    if (!isEmptyLines) gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function _createImg(keywords) {
