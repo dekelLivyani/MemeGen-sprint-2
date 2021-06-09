@@ -6,6 +6,7 @@ var gId = 0;
 
 
 function UpdateMeme(elImg) {
+    var elCanvas = getgElCanvas();
     gMeme = {
         selectedImgId: elImg.dataset.id,
         selectedLineIdx: 0,
@@ -15,6 +16,7 @@ function UpdateMeme(elImg) {
             size: 50,
             align: 'center',
             color: 'white',
+            colorStroke: 'black',
             x: elImg.width / 2,
             y: 50,
             rectSize: {
@@ -81,22 +83,29 @@ function changeSize(deff) {
     gMeme.lines[gMeme.selectedLineIdx].size += deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.height += deff;
-    writeText(gMeme.selectedLineIdx)
+    renderCanvas();
+    drawRect(gMeme.lines[gMeme.selectedLineIdx]);
 }
 
 function changeAlign(align) {
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     gMeme.lines[gMeme.selectedLineIdx].align = align;
-    writeText(gMeme.selectedLineIdx)
+    renderCanvas();
+    drawRect(gMeme.lines[gMeme.selectedLineIdx]);
 }
 
 function clickChangeColor() {
     var elColor = document.querySelector('.color-input');
     elColor.click();
+}
 
+function clickChangeColorStroke() {
+    var elColor = document.querySelector('.color-input-stroke');
+    elColor.click();
 }
 
 function addLineTogMeme(isEmptyLines) {
+    if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     var elImg = gMeme.elImg;
     var elCanvas = getgElCanvas();
     var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
@@ -106,6 +115,7 @@ function addLineTogMeme(isEmptyLines) {
         size: 50,
         align: 'center',
         color: 'white',
+        colorStroke: 'black',
         x: elImg.width / 2,
         y: yPos,
         rectSize: {

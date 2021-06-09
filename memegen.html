@@ -29,39 +29,44 @@
             </div>
             <div class="editor">
                 <input class="text-line" type="text" oninput="setTextIngMeme(this.value)">
-                <button class="btn" onclick="MoveLine(-5)">
+                <button class="btn" onclick="MoveLine(-5)" data-title="Move Up">
                     <img class="icon" src="img/ICONS/up.png" alt="">
                 </button>
-                <button class="btn" onclick="MoveLine(5)">
+                <button class="btn" onclick="MoveLine(5)" data-title="Move Down">
                     <img class="icon" src="img/ICONS/down.png" alt="">
                 </button>
-                <button class="btn" onclick="switchLine()">
+                <button class="btn" onclick="switchLine()" data-title="Switch Lines">
                     <img class="icon" src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt="">
                 </button>
-                <button class="btn" onclick="addLine()">
+                <button class="btn" onclick="addLine()" data-title="Add Line">
                     <img class="icon" src="img/ICONS/add.png" alt="">
                 </button>
-                <button class="btn" onclick="trashLine()">
+                <button class="btn" onclick="trashLine()" data-title="Delete Line">
                     <img class="icon" src="img/ICONS/trash.png" alt="">
                 </button>
-                <button class="btn" onclick="changeSize(2)">
+                <button class="btn" onclick="changeSize(2)" data-title="Increase Size">
                     <img class="icon" src="img/ICONS/increase font-icon.png" alt="">
                 </button>
-                <button class="btn" onclick="changeSize(-2)">
+                <button class="btn" onclick="changeSize(-2)" data-title="Decrease Size">
                     <img class="icon" src="img/ICONS/decrease font-icon.png" alt="">
                 </button>
-                <button class="btn" onclick="changeAlign('start')">
+
+                <button class="btn" onclick="changeAlign('start')" data-title="Align Left">
                     <img class="icon" src="img/ICONS/align-to-left.png" alt="">
                 </button>
-                <button class="btn" onclick="changeAlign('center')">
+                <button class="btn" onclick="changeAlign('center')" data-title="Align Center">
                     <img class="icon" src="img/ICONS/center-text-alignment.png" alt="">
                 </button>
-                <button class="btn" onclick="changeAlign('end')">
+                <button class="btn" onclick="changeAlign('end')" data-title="Align Right">
                     <img class="icon" src="img/ICONS/align-to-right.png" alt="">
                 </button>
                 <input class="color-input" type="color" oninput="changeColor()" hidden>
-                <button class=" btn " onclick="clickChangeColor()">
-                    <img class="icon " src="img/ICONS/paint-board-and-brush.png " alt=" ">
+                <button class="btn" onclick="clickChangeColor()" data-title="Text Color">
+                    <img class="icon" src="img/ICONS/paint-board-and-brush.png " alt=" ">
+                </button>
+                <input class="color-input-stroke" type="color" oninput="changeColorStroke()" hidden>
+                <button class="btn" onclick="clickChangeColorStroke()" data-title="Stroke Color">
+                    <img class="icon" src="img/ICONS/text stroke.png ">
                 </button>
             </div>
         </div>

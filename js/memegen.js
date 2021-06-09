@@ -35,7 +35,9 @@ function addMouseListeners() {
 // }
 
 function onClickCanvas(ev) {
+    console.log(ev.offsetX);
     var meme = getgMeme();
+    console.log(meme.lines[0].rectSize.width, meme.lines[0].rectSize.pos.x);
     if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     const lineClicked = meme.lines.find(line =>
         ev.offsetX > line.rectSize.pos.x &&
@@ -51,6 +53,8 @@ function onClickCanvas(ev) {
         renderCanvas();
         drawRect(lineClicked);
         meme.selectedLineIdx = idxLine;
+    } else {
+        renderCanvas();
     }
 }
 
@@ -97,7 +101,7 @@ function writeText(lineIdx, isBackUpTexted = false) {
         renderCanvas();
         drawRect(memeLine);
     }
-    gCtx.strokeStyle = 'black';
+    gCtx.strokeStyle = memeLine.colorStroke;
     gCtx.lineWidth = 2;
     gCtx.textAlign = memeLine.align;
     gCtx.fillStyle = memeLine.color;
@@ -108,10 +112,32 @@ function writeText(lineIdx, isBackUpTexted = false) {
 }
 
 function drawRect(memeLine) {
-    gCtx.beginPath()
-    gCtx.rect(20, memeLine.y - memeLine.size + 3, gElCanvas.width - 40, memeLine.size + 7);
-    gCtx.strokeStyle = 'red'
+    var x0 = memeLine.rectSize.pos.x;
+    var y0 = memeLine.rectSize.pos.y;
+    var x1 = memeLine.rectSize.pos.x + gElCanvas.width - 40;
+    var y1 = memeLine.rectSize.pos.y + memeLine.size + 7;
+    var r = 70;
+    var w = x1 - x0;
+    var h = y1 - y0;
+    if (r > w / 2) r = w / 2;
+    if (r > h / 2) r = h / 2;
+    gCtx.beginPath();
+    gCtx.moveTo(x1 - r, y0);
+    gCtx.quadraticCurveTo(x1, y0, x1, y0 + r);
+    gCtx.lineTo(x1, y1 - r);
+    gCtx.quadraticCurveTo(x1, y1, x1 - r, y1);
+    gCtx.lineTo(x0 + r, y1);
+    gCtx.quadraticCurveTo(x0, y1, x0, y1 - r);
+    gCtx.lineTo(x0, y0 + r);
+    gCtx.quadraticCurveTo(x0, y0, x0 + r, y0);
+    gCtx.closePath();
+    gCtx.strokeStyle = 'red';
     gCtx.stroke()
+
+    // gCtx.beginPath()
+    // gCtx.rect(20, memeLine.y - memeLine.size + 3, gElCanvas.width - 40, memeLine.size + 7);
+    // gCtx.strokeStyle = 'red'
+    // gCtx.stroke()
 }
 
 function MoveLine(deff) {
@@ -121,7 +147,8 @@ function MoveLine(deff) {
     var currLine = meme.lines[lineNum];
     currLine.y += deff;
     currLine.rectSize.pos.y += deff;
-    writeText(lineNum);
+    renderCanvas();
+    drawRect(currLine);
 }
 
 function addLine() {
@@ -158,26 +185,30 @@ function switchLine() {
     if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     var currlineNum = meme.selectedLineIdx;
     var nextLineNum;
-    var nextTextLine;
     var tempCurrTextLine = meme.lines[currlineNum].text;
 
     if (meme.lines[currlineNum - 1]) {
         nextLineNum = meme.selectedLineIdx - 1;
-        nextTextLine = meme.lines[currlineNum - 1].text;
     } else {
         nextLineNum = meme.lines.length - 1;
-        nextTextLine = meme.lines[nextLineNum].text;
     }
 
     meme.lines[currlineNum].text = meme.lines[nextLineNum].text;
     meme.lines[nextLineNum].text = tempCurrTextLine;
-    writeText(nextLineNum);
+    renderCanvas();
+    drawRect(meme.lines[nextLineNum]);
     gMeme.selectedLineIdx = nextLineNum;
 }
 
 function changeColor() {
     var elColor = document.querySelector('.color-input');
     gMeme.lines[gMeme.selectedLineIdx].color = elColor.value;
+    renderCanvas();
+}
+
+function changeColorStroke() {
+    var elColor = document.querySelector('.color-input-stroke');
+    gMeme.lines[gMeme.selectedLineIdx].colorStroke = elColor.value;
     renderCanvas();
 }
 

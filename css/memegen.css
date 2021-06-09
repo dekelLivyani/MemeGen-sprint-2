@@ -81,6 +81,24 @@ input {
     height: 2rem;
 }
 
+.btn {
+    position: relative;
+}
+
+.btn:hover:after {
+    content: attr(data-title);
+    position: absolute;
+    font-size: 11px;
+    font-family: verdana;
+    top: -110%;
+    left: 0;
+    background: rgb(201, 222, 243);
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    z-index: 1;
+}
+
 .icon {
     width: 1.56rem;
     height: 1.8rem;
