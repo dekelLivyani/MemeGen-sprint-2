@@ -14,3 +14,8 @@ function renderMyMemes() {
     var elConteiner = document.querySelector('.conteinter-my-memes');
     elConteiner.innerHTML = strHtml;
 }
+
+
+function OpenMenu() {
+    document.body.classList.toggle('menu-open');
+}

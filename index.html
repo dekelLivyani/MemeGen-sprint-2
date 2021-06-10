@@ -22,10 +22,18 @@
     </header>
 
     <main>
-        <div class="gallery">
-            <div class="search-img">
+        <div class="gallery flex">
+            <div class="search-img grid">
                 <input class="filter-img" type="text" placeholder="Search" oninput="filterImg(this.value)">
-                <div class="searched"><span>x</span></div>
+                <button class="btn-gallery all" onClick="renderImgs()">All</button>
+                <button class="btn-gallery more" onClick="moreSearch()">More</button>
+                <div class="searched-show"></div>
+                <div class="upload">
+                    <button class="file-input btn-gallery" onclick="document.getElementById('getFile').click()">Upload</button>
+                    <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
+                    <!-- <input type="file" id="files" class="file-input btn-gallery" onchange="onImgInput(event)" /> -->
+                </div>
+                <button class="add-img btn-gallery hide" onClick="addImgToGallery()">Add</button>
             </div>
             <div class="imgs-container flex"></div>
         </div>

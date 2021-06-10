@@ -2,54 +2,58 @@
 
 var gImgs;
 var gMeme;
-var gId = 0;
-
+var gIdImg = 0;
+var gIdLine = 0;
+var gKeys = ['funny', 'celeb', 'politic', 'animal', 'baby', 'good vibes', 'crazy', 'shocked', 'lovely', 'sarcastic', 'trans', 'toy-story', 'trump'];
 
 function UpdateMeme(elImg) {
+    var elCanvas = getgElCanvas();
     gMeme = {
         selectedImgId: elImg.dataset.id,
         selectedLineIdx: 0,
         elImg,
         lines: [{
+            id: gIdLine++,
             text: '',
             size: 50,
             align: 'center',
             color: 'white',
             colorStroke: 'black',
-            x: elImg.width / 2,
+            x: elCanvas.width / 2,
             y: 50,
             rectSize: {
                 pos: { x: 20, y: 3 },
                 height: 65,
                 width: elImg.width - 40
-            }
+            },
+            isDrag: false
         }]
     }
 }
 
-function getPosXToWrite(lineIdx) {
-    var elCanvas = getgElCanvas();
-    var xPos;
-    switch (gMeme.lines[lineIdx].align) {
-        case 'start':
-            {
-                xPos = 50;
-                break;
-            }
-        case 'center':
-            {
-                xPos = elCanvas.width / 2;
-                break;
-            }
-        case 'end':
-            {
-                xPos = elCanvas.width - 50;
-                break;
-            }
-    }
-    gMeme.x = xPos;
-    return xPos;
-}
+// function getPosXToWrite(lineIdx) {
+//     var elCanvas = getgElCanvas();
+//     var xPos;
+//     switch (gMeme.lines[lineIdx].align) {
+//         case 'start':
+//             {
+//                 xPos = 50;
+//                 break;
+//             }
+//         case 'center':
+//             {
+//                 xPos = elCanvas.width / 2;
+//                 break;
+//             }
+//         case 'end':
+//             {
+//                 xPos = elCanvas.width - 50;
+//                 break;
+//             }
+//     }
+//     gMeme.x = xPos;
+//     return xPos;
+// }
 
 function createImges() {
     gImgs = [];
@@ -111,18 +115,20 @@ function addLineTogMeme(isEmptyLines) {
     var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
     if (gMeme.lines.length === 0) yPos = 50;
     gMeme.lines.push({
+        id: gIdLine++,
         text: '',
         size: 50,
         align: 'center',
         color: 'white',
         colorStroke: 'black',
-        x: elImg.width / 2,
+        x: elCanvas.width / 2,
         y: yPos,
         rectSize: {
             pos: { x: 20, y: yPos - 50 + 3 },
             height: 65,
             width: elImg.width - 40
-        }
+        },
+        isDrag: false
     })
     if (!isEmptyLines) gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
@@ -144,10 +150,16 @@ function downloadMeme(elLink) {
     document.location = 'MyMemes.html';
 }
 
-
+function addImg(img) {
+    gImgs.unshift({ id: gIdImg++, url: img.src, keywords: [] });
+}
 
 function _createImg(keywords) {
-    return { id: gId++, url: `img/Gallery/${gId}.jpg`, keywords };
+    return { id: gIdImg++, url: `img/Gallery/${gIdImg}.jpg`, keywords };
+}
+
+function setLineDrag(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
 // Get Globals Variable
@@ -158,4 +170,8 @@ function getgMeme() {
 
 function getgImgs() {
     return gImgs;
+}
+
+function getgKeys() {
+    return gKeys;
 }
