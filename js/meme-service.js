@@ -53,7 +53,7 @@ function getPosXToWrite(lineIdx) {
 
 function createImges() {
     gImgs = [];
-    gImgs.push(_createImg(['celeb', 'politic']));
+    gImgs.push(_createImg(['celeb', 'politic', 'trump']));
     gImgs.push(_createImg(['animal']));
     gImgs.push(_createImg(['animal', 'baby', 'funny', 'good vibes']));
     gImgs.push(_createImg(['animal']));

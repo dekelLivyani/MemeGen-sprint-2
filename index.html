@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/memegen.css">
+    <link rel="stylesheet" href="css/index.css">
     <title>MemeGen</title>
 </head>
 
@@ -22,7 +22,13 @@
     </header>
 
     <main>
-        <div class="imgs-container flex"></div>
+        <div class="gallery">
+            <div class="search-img">
+                <input class="filter-img" type="text" placeholder="Search" oninput="filterImg(this.value)">
+                <div class="searched"><span>x</span></div>
+            </div>
+            <div class="imgs-container flex"></div>
+        </div>
         <div class="editor-container flex justify-center hide">
             <div class="canvas-container">
                 <canvas class="canvas"></canvas>

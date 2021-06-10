@@ -56,8 +56,7 @@ function onClickCanvas(ev) {
     }
 }
 
-function renderImgs() {
-    var imgs = getgImgs();
+function renderImgs(imgs = getgImgs()) {
     var strHTML = '';
     imgs.forEach((img, idx) => {
         strHTML += `<img class="galery-img" data-id="${idx}" src="${img.url}" alt="" onclick="drawImg(this)">`
@@ -65,6 +64,14 @@ function renderImgs() {
     var elImgs = document.querySelector('.imgs-container');
     elImgs.innerHTML = strHTML;
     document.querySelector('footer').style.bottom = 0;
+}
+
+function filterImg(text) {
+    var imgs = getgImgs();
+    var imgsToDisplay = imgs.filter(img =>
+        img.keywords.find(key => key.includes(text))
+    )
+    renderImgs(imgsToDisplay);
 }
 
 function resizeCanvas() {
@@ -200,14 +207,14 @@ function changeColorStroke() {
 function openEditor() {
     var elEditor = document.querySelector('.editor-container');
     elEditor.classList.remove('hide');
-    var elEditor = document.querySelector('.imgs-container');
+    var elEditor = document.querySelector('.gallery');
     elEditor.classList.add('hide');
 }
 
 function openGallery() {
     var elEditor = document.querySelector('.editor-container');
     elEditor.classList.add('hide');
-    var elEditor = document.querySelector('.imgs-container');
+    var elEditor = document.querySelector('.gallery');
     elEditor.classList.remove('hide');
     gMeme = null;
     document.querySelector('.text-line').value = '';
