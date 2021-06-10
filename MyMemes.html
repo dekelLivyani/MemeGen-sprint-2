@@ -6,26 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/memegen.css">
+    <link rel="stylesheet" href="css/myMemes.css">
     <title>My Memes</title>
 </head>
 
 <body onload="init()">
     <div class="main-screen" onclick="OpenMenu()"> </div>
     <header class="flex align-center justify-between">
-        <a href="MemeGen.html">
+        <a href="index.html">
             <img class="logo" src="img/LOGO.png" onclick="openGallery()" alt="">
         </a>
         <ul class="nav-bar flex">
-            <li onclick="openGallery()"><a href="MemeGen.html">Gallery </a></li>
+            <li onclick="openGallery()"><a href="index.html">Gallery </a></li>
             <li><a href="myMemes.html"> Memes </a></li>
             <li>About </li>
         </ul>
         <button class="btn-menu" onclick="OpenMenu()">☰</button>
     </header>
+    <main>
+        <div class="conteinter-my-memes flex"></div>
 
-    <div class="conteinter-my-memes"></div>
-
-
+    </main>
     <footer> By Dekel Livyani ©</footer>
     <script src="js/memegen-localstorge.js "></script>
     <script src="js/myMemes.js "></script>

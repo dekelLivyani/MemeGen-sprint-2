@@ -1,0 +1,5 @@
+.conteinter-my-memes {
+    margin: 20px;
+    flex-wrap: wrap;
+    gap: 15px
+}

@@ -3,7 +3,6 @@
 var gImgs;
 var gMeme;
 var gId = 0;
-var gMemeIdSave = 1;
 
 
 function UpdateMeme(elImg) {
@@ -129,11 +128,23 @@ function addLineTogMeme(isEmptyLines) {
 }
 
 function saveMeme() {
-    saveToStorage(`meme${gMemeIdSave}`, gMeme);
-    gMemeIdSave++;
-    var x = loadFromStorage(`meme${gMemeIdSave-1}`);
-    console.log(x.elImg);
+    renderCanvas();
+    var elCanvas = getgElCanvas();
+    var imgContent = elCanvas.toDataURL();
+    saveToStorage(`meme${localStorage.length}`, [gMeme, imgContent]);
+    document.location = 'MyMemes.html';
 }
+
+function downloadMeme(elLink) {
+    renderCanvas();
+    var elCanvas = getgElCanvas();
+    const data = elCanvas.toDataURL()
+    elLink.href = data
+    elLink.download = 'your Meme';
+    document.location = 'MyMemes.html';
+}
+
+
 
 function _createImg(keywords) {
     return { id: gId++, url: `img/Gallery/${gId}.jpg`, keywords };

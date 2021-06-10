@@ -102,7 +102,7 @@ header {
 
 main {
     margin-top: 7rem;
-    height: 85%;
+    min-height: calc(85vh - 45px);
 }
 
 .imgs-container {
@@ -136,7 +136,7 @@ main {
     flex-direction: column;
     border-radius: 2rem;
     padding: 1.5rem 0;
-    gap: 1.2rem;
+    gap: 1.5rem;
 }
 
 .text-line {
@@ -198,15 +198,24 @@ main {
     height: 1.8rem;
 }
 
-.save {
+.save,
+.download {
     border: 0;
     width: 7rem;
     height: 2rem;
     border-radius: 0.4rem;
     font-size: 1.375rem;
     color: #FFFFFF;
-    background-color: #8F44BB;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.load-meme button:nth-child(1) {
+    background-color: #8F44BB;
+    margin-right: 10px;
+}
+
+.load-meme button:nth-child(2) {
+    background-color: #1E7CD3;
 }
 
 footer {
@@ -217,8 +226,6 @@ footer {
     font-size: 1.6rem;
     text-align: center;
     padding: 0.3rem;
-    position: absolute;
-    bottom: 0;
     z-index: -1;
 }
 
@@ -233,6 +240,7 @@ footer {
     body.menu-open .logo {
         opacity: 0.6;
         cursor: auto;
+        pointer-events: none;
     }
     header .btn-menu {
         display: inline;
