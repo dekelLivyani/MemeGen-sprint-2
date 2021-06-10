@@ -24,36 +24,36 @@ function UpdateMeme(elImg) {
             rectSize: {
                 pos: { x: 20, y: 3 },
                 height: 65,
-                width: elImg.width - 40
+                width: elCanvas.width - 40
             },
             isDrag: false
         }]
     }
 }
 
-// function getPosXToWrite(lineIdx) {
-//     var elCanvas = getgElCanvas();
-//     var xPos;
-//     switch (gMeme.lines[lineIdx].align) {
-//         case 'start':
-//             {
-//                 xPos = 50;
-//                 break;
-//             }
-//         case 'center':
-//             {
-//                 xPos = elCanvas.width / 2;
-//                 break;
-//             }
-//         case 'end':
-//             {
-//                 xPos = elCanvas.width - 50;
-//                 break;
-//             }
-//     }
-//     gMeme.x = xPos;
-//     return xPos;
-// }
+function getPosXToWrite(lineIdx) {
+    var elCanvas = getgElCanvas();
+    var xPos;
+    switch (gMeme.lines[lineIdx].align) {
+        case 'start':
+            {
+                xPos = 50;
+                break;
+            }
+        case 'center':
+            {
+                xPos = elCanvas.width / 2;
+                break;
+            }
+        case 'end':
+            {
+                xPos = elCanvas.width - 50;
+                break;
+            }
+    }
+    gMeme.x = xPos;
+    return xPos;
+}
 
 function createImges() {
     gImgs = [];
@@ -94,6 +94,9 @@ function changeSize(deff) {
 function changeAlign(align) {
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     gMeme.lines[gMeme.selectedLineIdx].align = align;
+    if (align === 'end') {}
+    var posX = getPosXToWrite(gMeme.selectedLineIdx);
+    gMeme.lines[gMeme.selectedLineIdx].x = posX;
     renderCanvas();
     drawRect(gMeme.lines[gMeme.selectedLineIdx]);
 }
@@ -110,7 +113,6 @@ function clickChangeColorStroke() {
 
 function addLineTogMeme(isEmptyLines) {
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
-    var elImg = gMeme.elImg;
     var elCanvas = getgElCanvas();
     var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
     if (gMeme.lines.length === 0) yPos = 50;
@@ -126,7 +128,7 @@ function addLineTogMeme(isEmptyLines) {
         rectSize: {
             pos: { x: 20, y: yPos - 50 + 3 },
             height: 65,
-            width: elImg.width - 40
+            width: elCanvas.width - 40
         },
         isDrag: false
     })
@@ -142,6 +144,7 @@ function saveMeme() {
 }
 
 function downloadMeme(elLink) {
+    saveMeme();
     renderCanvas();
     var elCanvas = getgElCanvas();
     const data = elCanvas.toDataURL()

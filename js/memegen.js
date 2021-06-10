@@ -4,6 +4,7 @@ var gElCanvas;
 var gCtx;
 var gCurrSerachNum = 0;
 var gStartPos;
+var isReSize = false;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
@@ -39,7 +40,6 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-
     var meme = getgMeme();
     const pos = getEvPos(ev)
     var lineClick = islineClick(ev);
@@ -49,10 +49,10 @@ function onDown(ev) {
     document.body.style.cursor = 'grabbing'
 }
 
-function onUp() {
-
+function onUp(ev) {
+    onClickCanvas(ev);
     setLineDrag(false)
-    document.body.style.cursor = 'grab'
+    document.body.style.cursor = 'unset'
 }
 
 function onMove(ev) {
@@ -135,6 +135,7 @@ function getObjMapSearches() {
 }
 
 function filterImg(text) {
+    text = text.toLowerCase();
     var imgs = getgImgs();
     var imgsToDisplay = imgs.filter(img =>
         img.keywords.find(key => key.includes(text))
@@ -163,21 +164,20 @@ function loadImageFromInput(ev, onImageReady) {
 
 }
 
-
 function resizeCanvas() {
     var elContainer = document.querySelector('.canvas-container');
     gElCanvas.width = elContainer.offsetWidth;
     gElCanvas.height = elContainer.offsetWidth;
+    renderCanvas();
 }
 
 function renderCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
     var meme = getgMeme();
-    drawImg(meme.elImg);
+    if (meme) drawImg(meme.elImg);
 }
 
 function onClickCanvas(ev) {
-    console.log('yes');
     var meme = getgMeme();
     if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     var lineClick = islineClick(ev)
@@ -200,6 +200,7 @@ function islineClick(ev) {
         x: ev.offsetX,
         y: ev.offsetY
     }
+
     if (gTouchEvs.includes(ev.type)) {
         ev.preventDefault()
         ev = ev.changedTouches[0]
@@ -219,16 +220,15 @@ function islineClick(ev) {
 
 function drawImg(elImg) {
     if (document.querySelector('.editor-container').classList.contains('hide')) openEditor();
-    resizeCanvas();
+    var meme = getgMeme()
+    if (!meme) resizeCanvas();
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
     var meme = getgMeme();
     if (!meme || !meme.lines.length) {
         UpdateMeme(elImg);
         return;
     }
-    for (var i = 0; i < meme.lines.length; i++) {
-        writeText(i, true);
-    }
+    meme.lines.forEach((line, idx) => writeText(idx, true))
 }
 
 function writeText(lineIdx, isBackUpTexted = false) {
@@ -331,7 +331,6 @@ function changeColorStroke() {
     gMeme.lines[gMeme.selectedLineIdx].colorStroke = elColor.value;
     renderCanvas();
 }
-
 //switch between gallery and editor 
 
 function openEditor() {

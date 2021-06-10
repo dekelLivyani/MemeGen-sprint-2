@@ -72,7 +72,6 @@ header {
     height: 15vh;
     background-color: rgba(0, 0, 0, 0.911);
     border-bottom: 0.625rem solid rgb(0, 0, 0);
-    position: fixed;
     top: 0;
     color: wheat;
     width: 100%;
@@ -104,7 +103,7 @@ header {
 }
 
 main {
-    margin-top: 17vh;
+    margin-top: 1rem;
     min-height: calc(85vh - 45px);
 }
 
@@ -117,7 +116,7 @@ main {
     grid-template-rows: 1fr;
     gap: 5px;
     width: 90vw;
-    margin: 15px auto;
+    margin-bottom: 1rem;
 }
 
 .border {
@@ -139,9 +138,9 @@ main {
     display: inline-block;
     font-weight: bold;
     border-radius: 1rem;
-    /* padding: 0 1rem; */
     grid-column: 6/-1;
     justify-self: start;
+    color: wheat
 }
 
 .btn-gallery {
@@ -152,6 +151,7 @@ main {
     padding: 0.1rem 1rem;
     max-width: 250px;
     height: 30px;
+    margin-top: 5px;
 }
 
 .all {
@@ -173,6 +173,7 @@ main {
     grid-row: 1/2;
     grid-column: 3/4;
     font-size: 1rem;
+    width: 90px;
     justify-self: end;
 }
 
@@ -401,7 +402,7 @@ footer {
         position: fixed;
         height: 100vh;
         width: 50%;
-        top: 15vh;
+        top: 0;
         right: 0;
         background-color: rgb(73, 72, 72);
         transform: translateX(100%);
@@ -445,7 +446,7 @@ footer {
         grid-column: 1/-1;
     }
     .all {
-        grid-column: 1/4;
+        grid-column: 2/4;
         justify-self: center
     }
     .more {
