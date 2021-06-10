@@ -6,6 +6,10 @@
 
 body {
     margin: 0;
+    background-color: #3e4b68f3;
+    background-image: url('/img/backGround.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 ul {
@@ -32,24 +36,58 @@ button {
     justify-content: space-between;
 }
 
+.justify-center {
+    justify-content: center;
+}
+
+.main-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.692);
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.7s;
+}
+
+body.menu-open .main-screen {
+    pointer-events: auto;
+    opacity: 1;
+    z-index: 0;
+}
+
 header {
-    height: 6.25rem;
-    background-color: rgb(252, 73, 73);
+    height: 15vh;
+    /* height: 6.25rem; */
+    background-color: rgba(0, 0, 0, 0.911);
     border-bottom: 0.625rem solid rgb(0, 0, 0);
     position: fixed;
     top: 0;
+    color: wheat;
     width: 100%;
     padding: 0 2rem;
 }
 
-nav ul {
+.nav-bar {
     font-size: 1.7rem;
     gap: 15px;
+    z-index: 2;
 }
 
-nav ul li {
+.nav-bar li {
     font-family: cursive;
     cursor: pointer;
+}
+
+.nav-bar li:hover {
+    color: rgb(243, 125, 16)
+}
+
+.btn-menu {
+    display: none;
 }
 
 .logo {
@@ -59,30 +97,82 @@ nav ul li {
 
 main {
     margin-top: 7rem;
+    height: 85%;
 }
 
 .imgs-container {
     width: 90vw;
-    margin: 0 auto;
+    margin: 0 auto 25px;
     flex-wrap: wrap;
     gap: 0.3rem;
 }
 
+.galery-img {
+    height: 200px;
+}
+
 .canvas-container {
-    margin: 0 20px 0 100px;
     width: 35vw;
 }
 
-canvas {
-    border: 0.45rem solid gray;
+.editor-container {
+    width: 85vw;
+    margin: 0 auto 20px;
+    gap: 3.5rem;
 }
 
-input {
-    height: 2rem;
+.canvas {
+    border: 0.45rem solid rgb(49, 44, 44);
+    border-radius: 2rem;
+}
+
+.editor {
+    background-color: #555454;
+    flex-direction: column;
+    border-radius: 2rem;
+    padding: 1.5rem 0;
+    gap: 1.2rem;
+}
+
+.text-line {
+    height: 2.5rem;
+    width: 17rem;
+    display: block;
+    border-radius: 0.8rem;
+}
+
+.buttons-line-1 .btn:nth-child(1) {
+    background-color: rgb(86, 228, 86);
+}
+
+.buttons-line-1 .btn:nth-child(2) {
+    background-color: #fa5454;
+}
+
+.buttons-line-1 .btn:nth-child(3),
+.buttons-line-1 .btn:nth-child(4),
+.buttons-line-1 .btn:nth-child(5) {
+    background-color: #85baf7;
+}
+
+.buttons-line-2 {
+    padding: 0.7rem;
+    width: 70%;
+    flex-wrap: wrap;
+    background-color: rgb(35, 157, 197);
+    border-radius: 1rem;
+}
+
+.buttons-line-2 .btn:nth-child(5) {
+    justify-self: center;
 }
 
 .btn {
     position: relative;
+    margin: 5px;
+    border: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .btn:hover:after {
@@ -104,6 +194,70 @@ input {
     height: 1.8rem;
 }
 
+footer {
+    border-top: 2px solid rgba(255, 255, 255, 0.527);
+    height: 45px;
+    width: 100vw;
+    background-color: rgb(90, 108, 114);
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 0.3rem;
+    position: relative;
+    bottom: 0;
+    z-index: -1;
+}
+
 .hide {
     display: none;
+}
+
+@media (max-width: 700px) {
+    .galery-img {
+        height: 125px;
+    }
+    body.menu-open .logo {
+        opacity: 0.6;
+        cursor: auto;
+    }
+    header .btn-menu {
+        display: inline;
+        background-color: initial;
+        border: 0;
+        content: "☰";
+        cursor: pointer;
+        font-size: 2.5rem;
+        color: rgb(104, 102, 102);
+    }
+    body.menu-open .nav-bar {
+        transform: translateX(0);
+        transition: transform 1s;
+        z-index: 6;
+    }
+    .nav-bar {
+        flex-direction: column;
+        position: fixed;
+        height: 100vh;
+        width: 50%;
+        top: 0;
+        right: 0;
+        background-color: rgb(73, 72, 72);
+        transform: translateX(100%);
+        transition: transform 1s;
+        padding: 0;
+        margin: 0;
+    }
+    .nav-bar li {
+        width: 100%;
+        padding: 20px;
+        border-bottom: 1px solid rgb(54, 54, 54);
+    }
+    .editor-container {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+    }
+    .canvas-container {
+        min-height: 300px;
+        min-width: 300px;
+    }
 }

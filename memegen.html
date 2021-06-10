@@ -10,68 +10,71 @@
 </head>
 
 <body onload="init()">
+    <div class="main-screen" onclick="OpenMenu()"> </div>
     <header class="flex align-center justify-between">
         <img class="logo" src="img/LOGO.png" onclick="openGallery()" alt="">
-        <nav>
-            <ul class="flex">
-                <li onclick="openGallery()">Gallery</li> |
-                <li>Memes</li> |
-                <li>About </li>
-            </ul>
-        </nav>
+        <ul class="nav-bar flex">
+            <li onclick="openGallery()">Gallery</li>
+            <li>Memes</li>
+            <li>About </li>
+        </ul>
+        <button class="btn-menu" onclick="OpenMenu()">☰</button>
     </header>
 
-    <main class="flex">
+    <main>
         <div class="imgs-container flex"></div>
-        <div class="editor-container flex hide">
+        <div class="editor-container flex justify-center hide">
             <div class="canvas-container">
                 <canvas class="canvas"></canvas>
             </div>
-            <div class="editor">
-                <input class="text-line" type="text" oninput="setTextIngMeme(this.value)">
-                <button class="btn" onclick="MoveLine(-5)" data-title="Move Up">
+            <div class="editor flex align-center">
+                <input class="text-line" type="text" placeholder="Never be afraid" oninput="setTextIngMeme(this.value)">
+                <div class="buttons-line-1">
+                    <button class="btn" onclick="addLine()" data-title="Add Line">
+                        <img class="icon" src="img/ICONS/add.png" alt="">
+                    </button>
+                    <button class="btn" onclick="trashLine()" data-title="Delete Line">
+                        <img class="icon" src="img/ICONS/trash.png" alt="">
+                    </button>
+                    <button class="btn" onclick="MoveLine(-5)" data-title="Move Up">
                     <img class="icon" src="img/ICONS/up.png" alt="">
                 </button>
-                <button class="btn" onclick="MoveLine(5)" data-title="Move Down">
+                    <button class="btn" onclick="MoveLine(5)" data-title="Move Down">
                     <img class="icon" src="img/ICONS/down.png" alt="">
                 </button>
-                <button class="btn" onclick="switchLine()" data-title="Switch Lines">
+                    <button class="btn" onclick="switchLine()" data-title="Switch Lines">
                     <img class="icon" src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt="">
                 </button>
-                <button class="btn" onclick="addLine()" data-title="Add Line">
-                    <img class="icon" src="img/ICONS/add.png" alt="">
-                </button>
-                <button class="btn" onclick="trashLine()" data-title="Delete Line">
-                    <img class="icon" src="img/ICONS/trash.png" alt="">
-                </button>
-                <button class="btn" onclick="changeSize(2)" data-title="Increase Size">
+                </div>
+                <div class="buttons-line-2 flex justify-center">
+                    <button class="btn" onclick="changeSize(2)" data-title="Increase Size">
                     <img class="icon" src="img/ICONS/increase font-icon.png" alt="">
                 </button>
-                <button class="btn" onclick="changeSize(-2)" data-title="Decrease Size">
+                    <button class="btn" onclick="changeSize(-2)" data-title="Decrease Size">
                     <img class="icon" src="img/ICONS/decrease font-icon.png" alt="">
                 </button>
-
-                <button class="btn" onclick="changeAlign('start')" data-title="Align Left">
+                    <button class="btn" onclick="clickChangeColor()" data-title="Text Color">
+                <img class="icon" src="img/ICONS/paint-board-and-brush.png " alt=" ">
+            </button>
+                    <button class="btn" onclick="clickChangeColorStroke()" data-title="Stroke Color">
+                <img class="icon" src="img/ICONS/text stroke.png ">
+            </button>
+                    <button class="btn" onclick="changeAlign('start')" data-title="Align Left">
                     <img class="icon" src="img/ICONS/align-to-left.png" alt="">
                 </button>
-                <button class="btn" onclick="changeAlign('center')" data-title="Align Center">
+                    <button class="btn" onclick="changeAlign('center')" data-title="Align Center">
                     <img class="icon" src="img/ICONS/center-text-alignment.png" alt="">
                 </button>
-                <button class="btn" onclick="changeAlign('end')" data-title="Align Right">
+                    <button class="btn" onclick="changeAlign('end')" data-title="Align Right">
                     <img class="icon" src="img/ICONS/align-to-right.png" alt="">
                 </button>
-                <input class="color-input" type="color" oninput="changeColor()" hidden>
-                <button class="btn" onclick="clickChangeColor()" data-title="Text Color">
-                    <img class="icon" src="img/ICONS/paint-board-and-brush.png " alt=" ">
-                </button>
-                <input class="color-input-stroke" type="color" oninput="changeColorStroke()" hidden>
-                <button class="btn" onclick="clickChangeColorStroke()" data-title="Stroke Color">
-                    <img class="icon" src="img/ICONS/text stroke.png ">
-                </button>
+                    <input class="color-input" type="color" oninput="changeColor()" hidden>
+                    <input class="color-input-stroke" type="color" oninput="changeColorStroke()" hidden>
+                </div>
             </div>
         </div>
     </main>
-
+    <footer> By Dekel Livyani ©</footer>
     <script src="js/memegen-localstorge.js "></script>
     <script src="js/meme-service.js "></script>
     <script src="js/memegen.js "></script>
