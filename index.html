@@ -15,7 +15,7 @@
         <img class="logo" src="img/LOGO.png" onclick="openGallery()" alt="">
         <ul class="nav-bar flex">
             <li onclick="openGallery()">Gallery</li>
-            <li>Memes</li>
+            <li><a href="myMemes.html"> Memes </a></li>
             <li>About </li>
         </ul>
         <button class="btn-menu" onclick="OpenMenu()">☰</button>
@@ -70,6 +70,9 @@
                 </button>
                     <input class="color-input" type="color" oninput="changeColor()" hidden>
                     <input class="color-input-stroke" type="color" oninput="changeColorStroke()" hidden>
+                </div>
+                <div class="load-meme">
+                    <button class="save" onclick="saveMeme()">Save</button>
                 </div>
             </div>
         </div>

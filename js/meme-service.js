@@ -3,10 +3,10 @@
 var gImgs;
 var gMeme;
 var gId = 0;
+var gMemeIdSave = 1;
 
 
 function UpdateMeme(elImg) {
-    var elCanvas = getgElCanvas();
     gMeme = {
         selectedImgId: elImg.dataset.id,
         selectedLineIdx: 0,
@@ -29,6 +29,7 @@ function UpdateMeme(elImg) {
 }
 
 function getPosXToWrite(lineIdx) {
+    var elCanvas = getgElCanvas();
     var xPos;
     switch (gMeme.lines[lineIdx].align) {
         case 'start':
@@ -38,12 +39,12 @@ function getPosXToWrite(lineIdx) {
             }
         case 'center':
             {
-                xPos = gElCanvas.width / 2;
+                xPos = elCanvas.width / 2;
                 break;
             }
         case 'end':
             {
-                xPos = gElCanvas.width - 50;
+                xPos = elCanvas.width - 50;
                 break;
             }
     }
@@ -125,6 +126,13 @@ function addLineTogMeme(isEmptyLines) {
         }
     })
     if (!isEmptyLines) gMeme.selectedLineIdx = gMeme.lines.length - 1;
+}
+
+function saveMeme() {
+    saveToStorage(`meme${gMemeIdSave}`, gMeme);
+    gMemeIdSave++;
+    var x = loadFromStorage(`meme${gMemeIdSave-1}`);
+    console.log(x.elImg);
 }
 
 function _createImg(keywords) {

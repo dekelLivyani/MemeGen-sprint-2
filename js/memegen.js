@@ -35,9 +35,7 @@ function addMouseListeners() {
 // }
 
 function onClickCanvas(ev) {
-    console.log(ev.offsetX);
     var meme = getgMeme();
-    console.log(meme.lines[0].rectSize.width, meme.lines[0].rectSize.pos.x);
     if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     const lineClicked = meme.lines.find(line =>
         ev.offsetX > line.rectSize.pos.x &&
@@ -195,7 +193,6 @@ function changeColorStroke() {
     var elColor = document.querySelector('.color-input-stroke');
     gMeme.lines[gMeme.selectedLineIdx].colorStroke = elColor.value;
     renderCanvas();
-    drawRect(meme.lines[meme.selectedLineIdx]);
 }
 
 //switch between gallery and editor 
