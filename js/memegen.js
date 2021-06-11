@@ -6,6 +6,7 @@ var gCurrSerachNum = 0;
 var gStartPos;
 var isReSize = false;
 
+
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
@@ -46,24 +47,45 @@ function onDown(ev) {
     var meme = getgMeme();
     const pos = getEvPos(ev)
     var lineClick = islineClick(ev);
-    if (!lineClick || meme.selectedLineIdx !== lineClick.id) return
-    setLineDrag(true);
-    gStartPos = pos;
-    document.body.style.cursor = 'grabbing'
+    if (isHaveStickerInCanvas() && isCircleClicked(pos)) {
+        setCircleDrag(true);
+        gStartPos = pos;
+    } else {
+        if (!lineClick || meme.selectedLineIdx !== lineClick.id) return
+        setLineDrag(true);
+        document.body.style.cursor = 'grabbing'
+        gStartPos = pos;
+    }
+
 }
 
 function onUp(ev) {
     onClickCanvas(ev);
-    setLineDrag(false)
-    document.body.style.cursor = 'unset'
+    setLineDrag(false);
+    const pos = getEvPos(ev);
+    if (isHaveStickerInCanvas() && isCircleClicked(pos)) {
+        setCircleDrag(false);
+    }
+   document.body.style.cursor = 'unset'
 }
 
 function onMove(ev) {
     const memeLine = getgMeme().lines[getgMeme().selectedLineIdx];
-    if (memeLine.isDrag) {
-        const pos = getEvPos(ev)
-        const dx = pos.x - gStartPos.x
-        const dy = pos.y - gStartPos.y
+    const pos = getEvPos(ev)
+    if (isHaveStickerInCanvas() && isCircleClicked(pos)) {
+        const circle = getgCircle();
+        var isCircleDrag = getgIsCircleDrag();
+        if (isCircleDrag) {
+            const dx = pos.x - gStartPos.x;
+            const dy = pos.y - gStartPos.y;
+            changeSizeSticker(memeLine, dx, dy);
+            gStartPos = pos;
+            renderCanvas()
+            drawRect(memeLine);
+        }
+    } else if (memeLine.isDrag) {
+        const dx = pos.x - gStartPos.x;
+        const dy = pos.y - gStartPos.y;
         moveLine(memeLine, dx, dy)
         gStartPos = pos;
         renderCanvas()
@@ -71,7 +93,25 @@ function onMove(ev) {
     }
 }
 
-function selectSticker(elSticker){
+function moveLineUpOrDown(deff) {
+    var meme = getgMeme();
+    if (meme.lines.length === 1 && meme.lines[0].text === '') return;
+    var lineNum = meme.selectedLineIdx;
+    var currLine = meme.lines[lineNum];
+    currLine.y += deff;
+    currLine.rectSize.pos.y += deff;
+    renderCanvas();
+    drawRect(currLine);
+}
+
+function changeSizeSticker(memeLine, dx, dy){
+    memeLine.sizeW += dx;
+    memeLine.sizeH += dy;
+    memeLine.rectSize.height += dx;
+    memeLine.rectSize.width += dy;
+}
+
+function selectSticker(elSticker) {
     document.querySelector('.text-line').value = '';
     addSticker(elSticker);
     renderCanvas();
@@ -135,9 +175,9 @@ function moreSearch() {
 function getObjMapSearches() {
     var keyMap = {};
     var imgs = getgImgs();
-    imgs.forEach(function(img) {
+    imgs.forEach(function (img) {
         var keysInImg = img.keywords;
-        keysInImg.forEach(function(key) {
+        keysInImg.forEach(function (key) {
             if (!keyMap[key]) keyMap[key] = 0;
             keyMap[key]++;
         })
@@ -166,7 +206,7 @@ function addImgToGallery() {
 
 function loadImageFromInput(ev, onImageReady) {
     var reader = new FileReader()
-    reader.onload = function(event) {
+    reader.onload = function (event) {
         var img = new Image()
         img.onload = onImageReady.bind(null, img)
         img.src = event.target.result
@@ -185,10 +225,11 @@ function resizeCanvas() {
 function renderCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
     var meme = getgMeme();
-    if (meme)drawImg(meme.elImg);
+    if (meme) drawImg(meme.elImg);
 }
 
 function onClickCanvas(ev) {
+    const pos = getEvPos(ev);
     var meme = getgMeme();
     if (meme.lines.length === 1 && meme.lines[0].text === '') return;
     var lineClick = islineClick(ev);
@@ -196,14 +237,14 @@ function onClickCanvas(ev) {
         const idxLine = meme.lines.findIndex(line =>
             line === lineClick
         )
-        if(lineClick.text === 'Never be afriad' && lineClick.id === 0){
+        if (lineClick.text === 'Never be afriad' && lineClick.id === 0) {
             document.querySelector('.text-line').value = '';
-        }else document.querySelector('.text-line').value = lineClick.text;
+        } else document.querySelector('.text-line').value = lineClick.text;
         renderCanvas();
         drawRect(lineClick);
         meme.selectedLineIdx = idxLine;
     } else {
-        renderCanvas();
+        if (!isHaveStickerInCanvas() || !isCircleClicked(pos)) renderCanvas();
     }
 }
 
@@ -213,7 +254,6 @@ function islineClick(ev) {
         x: ev.offsetX,
         y: ev.offsetY
     }
-
     if (gTouchEvs.includes(ev.type)) {
         ev.preventDefault()
         ev = ev.changedTouches[0]
@@ -252,43 +292,46 @@ function writeText(lineIdx, isBackUpTexted = false) {
         renderCanvas();
         drawRect(memeLine);
     }
-    if(memeLine.isSticker){
+    if (memeLine.isSticker) {
         var img = new Image();
         img.src = memeLine.img.src;
-        gCtx.drawImage(img, memeLine.x, memeLine.y, memeLine.size, memeLine.size);  
-    }else{
-    gCtx.strokeStyle = memeLine.colorStroke;
-    gCtx.lineWidth = 2;
-    gCtx.textAlign = memeLine.align;
-    gCtx.fillStyle = memeLine.color;
-    gCtx.font = `${memeLine.size}px Impact`;
-    gCtx.fillText(memeLine.text, memeLine.x, memeLine.y);
-    gCtx.strokeText(memeLine.text, memeLine.x, memeLine.y);
+        gCtx.drawImage(img, memeLine.x, memeLine.y, memeLine.sizeW, memeLine.sizeH);
+    } else {
+        gCtx.strokeStyle = memeLine.colorStroke;
+        gCtx.lineWidth = 2;
+        gCtx.textAlign = memeLine.align;
+        gCtx.fillStyle = memeLine.color;
+        gCtx.font = `${memeLine.size}px Impact`;
+        gCtx.fillText(memeLine.text, memeLine.x, memeLine.y);
+        gCtx.strokeText(memeLine.text, memeLine.x, memeLine.y);
     }
 }
 
 function drawRect(memeLine) {
     var x = memeLine.rectSize.pos.x;
     var y = memeLine.rectSize.pos.y;
-    var width = (memeLine.isSticker) ? memeLine.rectSize.width: gElCanvas.width;
+    var width = (memeLine.isSticker) ? memeLine.rectSize.width : gElCanvas.width;
+    var height = (memeLine.isSticker) ? memeLine.sizeH : memeLine.size;
     gCtx.beginPath()
-    gCtx.rect(x, y, width, memeLine.size +10)
+    gCtx.rect(x, y, width, height + 10)
     gCtx.fillStyle = '#aab5b83d'
-    gCtx.fillRect(x,y, width, memeLine.size +10)
+    gCtx.fillRect(x, y, width, height + 10)
     gCtx.strokeStyle = 'black'
     gCtx.stroke()
-
+    if (memeLine.isSticker) {
+        var posCircle = { x: x + width, y: y + memeLine.sizeH + 10 };
+        createCircle(posCircle);
+        drawArc(posCircle.x, posCircle.y);
+    }
 }
 
-function MoveLine(deff) {
-    var meme = getgMeme();
-    if (meme.lines.length === 1 && meme.lines[0].text === '') return;
-    var lineNum = meme.selectedLineIdx;
-    var currLine = meme.lines[lineNum];
-    currLine.y += deff;
-    currLine.rectSize.pos.y += deff;
-    renderCanvas();
-    drawRect(currLine);
+function drawArc(x, y) {
+    gCtx.beginPath()
+    gCtx.lineWidth = '6'
+    gCtx.arc(x, y, 7, 0, 2 * Math.PI)
+    gCtx.fillStyle = 'blue'
+    gCtx.fill()
+
 }
 
 function addLine() {

@@ -7,6 +7,8 @@ var gIdLine;
 var gKeys;
 var gKeysNumOfImg;
 var gSizeFont;
+var gCircle;
+var gIsCircleDrag;
 
 function renderGlobleInService(){
     gKeysNumOfImg = localStorage.length;
@@ -29,6 +31,7 @@ function UpdateMeme(elImg) {
             align: 'center',
             color: 'white',
             colorStroke: 'black',
+            isSticker:false,
             x: elCanvas.width / 2,
             y: 50,
             rectSize: {
@@ -38,6 +41,14 @@ function UpdateMeme(elImg) {
             },
             isDrag: false
         }],
+    }
+}
+
+function createCircle(pos) {
+    gCircle = {
+        pos,
+        size: 15,
+        color: 'blue',
     }
 }
 
@@ -98,7 +109,7 @@ function changeSize(deff) {
     if(gMeme.lines[gMeme.selectedLineIdx].isSticker){
         gMeme.lines[gMeme.selectedLineIdx].size += deff;
         gMeme.lines[gMeme.selectedLineIdx].rectSize.width += deff;
-   }else{
+    }else{
     gMeme.lines[gMeme.selectedLineIdx].size += deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.height += deff;
@@ -164,6 +175,8 @@ function addSticker(elSticker){
         img:elSticker,
         x: elCanvas.width /3,
         y: elCanvas.height / 3,
+        sizeW: 100,
+        sizeH: 100,
         size:100,
         rectSize: {
             pos: { x: elCanvas.width / 3, y: elCanvas.height / 3 },
@@ -176,7 +189,6 @@ function addSticker(elSticker){
 
 function saveMeme() {
     var numOfSaveImg = loadFromStorage('numOfSaveImg');
-    console.log(numOfSaveImg);
     if(!numOfSaveImg){
          saveToStorage('numOfSaveImg',1);
          numOfSaveImg = 1;
@@ -187,8 +199,6 @@ function saveMeme() {
     var elCanvas = getgElCanvas();
     var imgContent = elCanvas.toDataURL();
     saveToStorage(`meme${numOfSaveImg}`, [gMeme, imgContent]);
-    
-    console.log(numOfSaveImg);
     saveToStorage('numOfSaveImg',numOfSaveImg);
   document.location.href = 'myMemes2.html';
 }
@@ -221,6 +231,20 @@ function setSizeOfFont(canvasWidth){
     else gSizeFont = 35; 
 }
 
+function isHaveStickerInCanvas(){
+    return gMeme.lines.some(line => line.isSticker);
+}
+
+function isCircleClicked(clickedPos) {
+    const { pos } = gCircle;
+    const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
+    return distance <= gCircle.size
+}
+
+function setCircleDrag(isDrag) {
+    gIsCircleDrag = isDrag
+}
+
 // Get Globals Variable
 
 function getgMeme() {
@@ -237,4 +261,12 @@ function getgKeys() {
 
 function getgSizeFont(){
     return gSizeFont;
+}
+
+function getgCircle() {
+    return gCircle;
+}
+
+function getgIsCircleDrag(){
+    return gIsCircleDrag;
 }

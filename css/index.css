@@ -130,7 +130,7 @@ main {
     border-radius: 10px;
     padding-left: 10px;
     color: white;
-    grid-column: 1/3;
+    grid-column: 1/4;
 }
 
 .searched-show {
@@ -227,6 +227,7 @@ main {
 }
 
 .text-line {
+    padding-left: 10px;
     height: 2.5rem;
     width: 17rem;
     display: block;
@@ -358,7 +359,7 @@ footer {
     }
     .filter-img {
         grid-row: 1/2;
-        grid-column: 2/5;
+        grid-column: 2/7;
     }
     .all {
         grid-row: 2/3;
@@ -370,12 +371,12 @@ footer {
     }
     .upload {
         grid-row: 1/2;
-        grid-column: 5/6;
+        grid-column: 7/8;
         justify-self: start;
     }
     .add-img {
         grid-row: 1/2;
-        grid-column: 6/7;
+        grid-column: 8/9;
     }
 }
 
