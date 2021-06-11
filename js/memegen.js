@@ -8,6 +8,7 @@ var isReSize = false;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function init() {
+    renderGlobleInService();
     createImges();
     renderImgs();
     gElCanvas = document.querySelector('.canvas');
@@ -15,7 +16,6 @@ function init() {
     resizeCanvas();
     addListeners();
     renderSearches();
-
 }
 
 function addListeners() {

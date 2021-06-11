@@ -2,9 +2,17 @@
 
 var gImgs;
 var gMeme;
-var gIdImg = 0;
-var gIdLine = 0;
-var gKeys = ['funny', 'celeb', 'politic', 'animal', 'baby', 'good vibes', 'crazy', 'shocked', 'lovely', 'sarcastic', 'trans', 'toy-story', 'trump'];
+var gIdImg;
+var gIdLine;
+var gKeys;
+var gKeysNumOfImg;
+
+function renderGlobleInService(){
+    gKeysNumOfImg = localStorage.length;
+    gIdImg = 0;
+    gIdLine = 0;
+    gKeys = ['funny', 'celeb', 'politic', 'animal', 'baby', 'good vibes', 'crazy', 'shocked', 'lovely', 'sarcastic', 'trans', 'toy-story', 'trump'];
+}
 
 function UpdateMeme(elImg) {
     var elCanvas = getgElCanvas();
@@ -139,8 +147,10 @@ function saveMeme() {
     renderCanvas();
     var elCanvas = getgElCanvas();
     var imgContent = elCanvas.toDataURL();
-    saveToStorage(`meme${localStorage.length}`, [gMeme, imgContent]);
-    document.location = 'MyMemes2.html';
+    console.log(gKeysNumOfImg);
+    saveToStorage(`meme${gKeysNumOfImg}`, [gMeme, imgContent]);
+    gKeysNumOfImg++;
+   document.location = 'MyMemes2.html';
 }
 
 function downloadMeme(elLink) {
