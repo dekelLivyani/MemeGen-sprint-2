@@ -22,7 +22,7 @@
     </header>
 
     <main>
-        <div class="gallery flex">
+        <div class="gallery flex align-center">
             <div class="search-img grid">
                 <input class="filter-img" type="text" placeholder="Search" oninput="filterImg(this.value)">
                 <button class="btn-gallery all" onClick="renderImgs()">All</button>
@@ -42,12 +42,12 @@
             </div>
             <div class="editor flex align-center">
                 <input class="text-line" type="text" placeholder="Never be afraid" oninput="setTextIngMeme(this.value)">
-                <div class="buttons-line-1 ">
+                <div class="buttons-line-1">
                     <button class="btn" onclick="addLine()" data-title="Add Line">
                         <img class="icon" src="img/ICONS/add.png" alt=" ">
                     </button>
                     <button class="btn" onclick="trashLine()" data-title="Delete Line">
-                        <img class="icon " src="img/ICONS/trash.png" alt=" ">
+                        <img class="icon" src="img/ICONS/trash.png" alt=" ">
                     </button>
                     <button class="btn" onclick="MoveLine(-5)" data-title="Move Up">
                     <img class="icon" src="img/ICONS/up.png" alt=" ">

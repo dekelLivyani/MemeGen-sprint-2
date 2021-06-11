@@ -3,3 +3,12 @@
     flex-wrap: wrap;
     gap: 15px
 }
+
+.download{
+    background-color: #8F44BB;
+    margin-left: 20px;
+}
+
+.selected{
+    border:3px solid black;
+}

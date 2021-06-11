@@ -144,13 +144,12 @@ function saveMeme() {
 }
 
 function downloadMeme(elLink) {
-    saveMeme();
     renderCanvas();
     var elCanvas = getgElCanvas();
     const data = elCanvas.toDataURL()
     elLink.href = data
     elLink.download = 'your Meme';
-    document.location = 'MyMemes.html';
+    saveMeme();
 }
 
 function addImg(img) {

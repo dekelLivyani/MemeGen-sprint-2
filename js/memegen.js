@@ -15,6 +15,7 @@ function init() {
     resizeCanvas();
     addListeners();
     renderSearches();
+
 }
 
 function addListeners() {
@@ -267,8 +268,11 @@ function drawRect(memeLine) {
     gCtx.lineTo(x0, y0 + r);
     gCtx.quadraticCurveTo(x0, y0, x0 + r, y0);
     gCtx.closePath();
-    gCtx.strokeStyle = 'red';
+    gCtx.fillStyle = '#aab5b85e';
+    gCtx.fill()
+    gCtx.strokeStyle = 'black';
     gCtx.stroke();
+
 }
 
 function MoveLine(deff) {
