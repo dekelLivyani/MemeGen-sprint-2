@@ -88,9 +88,14 @@
                     <img src="img/stickers/pikachu.png" onclick="selectSticker(this)" alt="">
                     <img src="img/stickers/turtle.png" onclick="selectSticker(this)" alt="">
                 </div>
-                <div class="load-meme">
-                    <button class="save" onclick="saveMeme()">Save</button>
-                    <button class="download"><a href="#" onclick="downloadMeme(this)"> Download</a></button>
+                <div class="load-meme flex">
+                    <button class="load save" onclick="saveMeme()">Save</button>
+                    <button class="load download"><a href="#" onclick="downloadMeme(this)"> Download</a></button>
+                    <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button class="load publish" type="submit" >Publish</button>
+                        <div class="share-container"></div>
+                </form>
                 </div>
             </div>
         </div>
@@ -101,6 +106,7 @@
     <script src="js/memegen-localstorge.js "></script>
     <script src="js/meme-service.js "></script>
     <script src="js/memegen.js "></script>
+    <script src="js/upLoad.service.js "></script>
 </body>
 
 </html>

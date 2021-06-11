@@ -6,6 +6,7 @@ var gIdImg;
 var gIdLine;
 var gKeys;
 var gKeysNumOfImg;
+var gSizeFont;
 
 function renderGlobleInService(){
     gKeysNumOfImg = localStorage.length;
@@ -16,21 +17,22 @@ function renderGlobleInService(){
 
 function UpdateMeme(elImg) {
     var elCanvas = getgElCanvas();
+    setSizeOfFont(elCanvas.width);
     gMeme = {
         selectedImgId: elImg.dataset.id,
         selectedLineIdx: 0,
         elImg,
         lines: [{
             id: gIdLine++,
-            text: '',
-            size: 50,
+            text: 'Never be afriad',
+            size: gSizeFont,
             align: 'center',
             color: 'white',
             colorStroke: 'black',
             x: elCanvas.width / 2,
             y: 50,
             rectSize: {
-                pos: { x: 20, y: 3 },
+                pos: { x: 0, y: 50-gSizeFont},
                 height: 65,
                 width: elCanvas.width - 40
             },
@@ -94,9 +96,8 @@ function setTextIngMeme(text) {
 function changeSize(deff) {
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     if(gMeme.lines[gMeme.selectedLineIdx].isSticker){
-        console.log('yes');
         gMeme.lines[gMeme.selectedLineIdx].size += deff;
-        gMeme.lines[gMeme.selectedLineIdx].rectSize.width -=deff;
+        gMeme.lines[gMeme.selectedLineIdx].rectSize.width += deff;
    }else{
     gMeme.lines[gMeme.selectedLineIdx].size += deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
@@ -137,14 +138,14 @@ function addLineTogMeme(isEmptyLines) {
     gMeme.lines.push({
         id: gIdLine++,
         text: '',
-        size: 50,
+        size: gSizeFont,
         align: 'center',
         color: 'white',
         colorStroke: 'black',
         x: elCanvas.width / 2,
         y: yPos,
         rectSize: {
-            pos: { x: 20, y: yPos - 50 + 3 },
+            pos: { x: 0, y: yPos - gSizeFont},
             height: 65,
             width: elCanvas.width - 40
         },
@@ -171,17 +172,25 @@ function addSticker(elSticker){
         },
     })
     gMeme.selectedLineIdx++;
-    console.log(gMeme.lines[gMeme.lines.length-1]);
 }
 
 function saveMeme() {
+    var numOfSaveImg = loadFromStorage('numOfSaveImg');
+    console.log(numOfSaveImg);
+    if(!numOfSaveImg){
+         saveToStorage('numOfSaveImg',1);
+         numOfSaveImg = 1;
+    }else{
+        numOfSaveImg++;
+    }
     renderCanvas();
     var elCanvas = getgElCanvas();
     var imgContent = elCanvas.toDataURL();
-    console.log(gKeysNumOfImg);
-    saveToStorage(`meme${gKeysNumOfImg}`, [gMeme, imgContent]);
-    gKeysNumOfImg++;
-   document.location.href = 'myMemes2.html';
+    saveToStorage(`meme${numOfSaveImg}`, [gMeme, imgContent]);
+    
+    console.log(numOfSaveImg);
+    saveToStorage('numOfSaveImg',numOfSaveImg);
+  document.location.href = 'myMemes2.html';
 }
 
 function downloadMeme(elLink) {
@@ -205,6 +214,13 @@ function setLineDrag(isDrag) {
     gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
+function setSizeOfFont(canvasWidth){
+    if(canvasWidth > 400) gSizeFont = 50; 
+    if(canvasWidth > 350) gSizeFont = 45; 
+    else if(canvasWidth > 300) gSizeFont = 40; 
+    else gSizeFont = 35; 
+}
+
 // Get Globals Variable
 
 function getgMeme() {
@@ -217,4 +233,8 @@ function getgImgs() {
 
 function getgKeys() {
     return gKeys;
+}
+
+function getgSizeFont(){
+    return gSizeFont;
 }

@@ -7,9 +7,9 @@ function init() {
 
 function renderMyMemes() {
     var strHtml = '';
-    for (var i = 0; i < localStorage.length; i++) {
+    for (var i = 1; i <= loadFromStorage('numOfSaveImg'); i++) {
         var meme = loadFromStorage(`meme${i}`);
-        strHtml += `<img class="galery-img" data-id="${i+1}" onclick="selectImg(this)" src="${meme[1]}" alt="">`
+        strHtml += `<img class="galery-img" data-id="${i}" onclick="selectImg(this)" src="${meme[1]}" alt="">`
 
     }
     var elConteiner = document.querySelector('.conteinter-my-memes');

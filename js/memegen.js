@@ -196,7 +196,9 @@ function onClickCanvas(ev) {
         const idxLine = meme.lines.findIndex(line =>
             line === lineClick
         )
-        document.querySelector('.text-line').value = lineClick.text;
+        if(lineClick.text === 'Never be afriad' && lineClick.id === 0){
+            document.querySelector('.text-line').value = '';
+        }else document.querySelector('.text-line').value = lineClick.text;
         renderCanvas();
         drawRect(lineClick);
         meme.selectedLineIdx = idxLine;
@@ -236,12 +238,14 @@ function drawImg(elImg) {
     var meme = getgMeme();
     if (!meme || !meme.lines.length) {
         UpdateMeme(elImg);
+        renderCanvas();
         return;
     }
     meme.lines.forEach((line, idx) => writeText(idx, true))
 }
 
 function writeText(lineIdx, isBackUpTexted = false) {
+    setSizeOfFont(gElCanvas.width);
     var meme = getgMeme();
     var memeLine = meme.lines[lineIdx];
     if (!isBackUpTexted) {
@@ -264,37 +268,15 @@ function writeText(lineIdx, isBackUpTexted = false) {
 }
 
 function drawRect(memeLine) {
-    var x0 = memeLine.rectSize.pos.x;
-    var y0 = memeLine.rectSize.pos.y;
-    var y1 = y0 + memeLine.size + 7;
-    var x1;
-    var r; 
-    if(memeLine.isSticker){
-         x1 = x0 + memeLine.size ;
-         r = 10;
-    }
-    else {
-        x1 = x0 + gElCanvas.width - 40;
-        r = 70;
-    }
-    var w = x1 - x0;
-    var h = y1 - y0;
-    if (r > w / 2) r = w / 2;
-    if (r > h / 2) r = h / 2;
-    gCtx.beginPath();
-    gCtx.moveTo(x1 - r, y0);
-    gCtx.quadraticCurveTo(x1, y0, x1, y0 + r);
-    gCtx.lineTo(x1, y1 - r);
-    gCtx.quadraticCurveTo(x1, y1, x1 - r, y1);
-    gCtx.lineTo(x0 + r, y1);
-    gCtx.quadraticCurveTo(x0, y1, x0, y1 - r);
-    gCtx.lineTo(x0, y0 + r);
-    gCtx.quadraticCurveTo(x0, y0, x0 + r, y0);
-    gCtx.closePath();
-    gCtx.fillStyle = '#aab5b83d';
-    gCtx.fill()
-    gCtx.strokeStyle = 'black';
-    gCtx.stroke();
+    var x = memeLine.rectSize.pos.x;
+    var y = memeLine.rectSize.pos.y;
+    var width = (memeLine.isSticker) ? memeLine.rectSize.width: gElCanvas.width;
+    gCtx.beginPath()
+    gCtx.rect(x, y, width, memeLine.size +10)
+    gCtx.fillStyle = '#aab5b83d'
+    gCtx.fillRect(x,y, width, memeLine.size +10)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
 
 }
 
@@ -368,6 +350,7 @@ function openEditor() {
 }
 
 function openGallery() {
+    gIdLine = 0;
     var elEditor = document.querySelector('.editor-container');
     elEditor.classList.add('hide');
     var elEditor = document.querySelector('.gallery');
