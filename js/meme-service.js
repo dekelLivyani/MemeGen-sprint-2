@@ -171,7 +171,7 @@ function saveMeme() {
     console.log(gKeysNumOfImg);
     saveToStorage(`meme${gKeysNumOfImg}`, [gMeme, imgContent]);
     gKeysNumOfImg++;
-   document.location.href = '../MyMemes2.html';
+   document.location.href = 'myMemes2.html';
 }
 
 function downloadMeme(elLink) {
