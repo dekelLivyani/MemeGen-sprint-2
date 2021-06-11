@@ -29,7 +29,8 @@
                 <button class="btn-gallery more" onClick="moreSearch()">More</button>
                 <div class="searched-show"></div>
                 <div class="upload">
-                    <button class="file-input btn-gallery" onclick="document.getElementById('getFile').click()">Upload</button>
+                    <button class="file-input btn-gallery"
+                        onclick="document.getElementById('getFile').click()">Upload</button>
                     <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
                 </div>
                 <button class="add-img btn-gallery hide" onClick="addImgToGallery()">Add</button>
@@ -50,37 +51,37 @@
                         <img class="icon" src="img/ICONS/trash.png" alt=" ">
                     </button>
                     <button class="btn" onclick="moveLineUpOrDown(-5)" data-title="Move Up">
-                    <img class="icon" src="img/ICONS/up.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/up.png" alt=" ">
+                    </button>
                     <button class="btn" onclick="moveLineUpOrDown(5)" data-title="Move Down">
-                    <img class="icon" src="img/ICONS/down.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/down.png" alt=" ">
+                    </button>
                     <button class="btn" onclick="switchLine()" data-title="Switch Lines">
-                    <img class="icon" src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=" ">
+                    </button>
                 </div>
                 <div class="buttons-line-2 flex justify-center">
                     <button class="btn" onclick="changeSize(2)" data-title="Increase Size">
-                    <img class="icon" src="img/ICONS/increase font-icon.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/increase font-icon.png" alt=" ">
+                    </button>
                     <button class="btn" onclick="changeSize(-2)" data-title="Decrease Size">
-                    <img class="icon" src="img/ICONS/decrease font-icon.png" alt=" ">
-                </button>
-                <button class="btn" onclick="clickChangeColor()" data-title="Text Color">
-                    <img class="icon" src="img/ICONS/paint-board-and-brush.png" alt=" ">
-                </button>
-                        <button class="btn" onclick="clickChangeColorStroke()" data-title="Stroke Color">
-                    <img class="icon " src="img/ICONS/text stroke.png">
-                </button>
+                        <img class="icon" src="img/ICONS/decrease font-icon.png" alt=" ">
+                    </button>
+                    <button class="btn" onclick="clickChangeColor()" data-title="Text Color">
+                        <img class="icon" src="img/ICONS/paint-board-and-brush.png" alt=" ">
+                    </button>
+                    <button class="btn" onclick="clickChangeColorStroke()" data-title="Stroke Color">
+                        <img class="icon " src="img/ICONS/text stroke.png">
+                    </button>
                     <button class="btn" onclick="changeAlign('start')" data-title="Align Left">
-                    <img class="icon" src="img/ICONS/align-to-left.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/align-to-left.png" alt=" ">
+                    </button>
                     <button class="btn" onclick="changeAlign('center')" data-title="Align Center">
-                    <img class="icon" src="img/ICONS/center-text-alignment.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/center-text-alignment.png" alt=" ">
+                    </button>
                     <button class="btn" onclick="changeAlign('end')" data-title="Align Right">
-                    <img class="icon" src="img/ICONS/align-to-right.png" alt=" ">
-                </button>
+                        <img class="icon" src="img/ICONS/align-to-right.png" alt=" ">
+                    </button>
                 </div>
                 <div class="stickers">
                     <img src="img/stickers/lonely.png" onclick="selectSticker(this)" alt="">
@@ -93,9 +94,9 @@
                     <button class="load download"><a href="#" onclick="downloadMeme(this)"> Download</a></button>
                     <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                         <input name="img" id="imgData" type="hidden" />
-                        <button class="load publish" type="submit" >Publish</button>
+                        <button class="load publish" type="submit">Publish</button>
                         <div class="share-container"></div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>

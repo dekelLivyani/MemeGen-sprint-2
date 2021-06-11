@@ -10,7 +10,7 @@ var gSizeFont;
 var gCircle;
 var gIsCircleDrag;
 
-function renderGlobleInService(){
+function renderGlobleInService() {
     gKeysNumOfImg = localStorage.length;
     gIdImg = 0;
     gIdLine = 0;
@@ -31,11 +31,11 @@ function UpdateMeme(elImg) {
             align: 'center',
             color: 'white',
             colorStroke: 'black',
-            isSticker:false,
+            isSticker: false,
             x: elCanvas.width / 2,
             y: 50,
             rectSize: {
-                pos: { x: 0, y: 50-gSizeFont},
+                pos: { x: 0, y: 50 - gSizeFont },
                 height: 65,
                 width: elCanvas.width - 40
             },
@@ -44,12 +44,51 @@ function UpdateMeme(elImg) {
     }
 }
 
-function createCircle(pos) {
-    gCircle = {
-        pos,
-        size: 15,
-        color: 'blue',
-    }
+
+function addLineTogMeme(isEmptyLines) {
+    if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
+    var elCanvas = getgElCanvas();
+    var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
+    if (gMeme.lines.length === 0) yPos = 50;
+    gMeme.lines.push({
+        id: gIdLine++,
+        text: '',
+        size: gSizeFont,
+        align: 'center',
+        color: 'white',
+        colorStroke: 'black',
+        x: elCanvas.width / 2,
+        y: yPos,
+        rectSize: {
+            pos: { x: 0, y: yPos - gSizeFont },
+            height: 65,
+            width: elCanvas.width - 40
+        },
+        isDrag: false,
+        isSticker: false
+    })
+    if (!isEmptyLines) gMeme.selectedLineIdx = gMeme.lines.length - 1;
+}
+
+function addSticker(elSticker) {
+    var elCanvas = getgElCanvas();
+    gMeme.lines.push({
+        id: gIdLine++,
+        text: '',
+        isSticker: true,
+        img: elSticker,
+        x: elCanvas.width / 3,
+        y: elCanvas.height / 3,
+        sizeW: 100,
+        sizeH: 100,
+        size: 100,
+        rectSize: {
+            pos: { x: elCanvas.width / 3, y: elCanvas.height / 3 },
+            height: 107,
+            width: elSticker.width + 40
+        },
+    })
+    gMeme.selectedLineIdx++;
 }
 
 function getPosXToWrite(lineIdx) {
@@ -99,30 +138,29 @@ function createImges() {
 }
 
 function setTextIngMeme(text) {
-    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) addLine();
+    if (gMeme.lines[gMeme.selectedLineIdx].isSticker) addLine();
     gMeme.lines[gMeme.selectedLineIdx].text = text;
     writeText(gMeme.selectedLineIdx);
 }
 
-function changeSize(deff) {
+function changeSizeToLine(deff) {
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
-    if(gMeme.lines[gMeme.selectedLineIdx].isSticker){
-        gMeme.lines[gMeme.selectedLineIdx].size += deff;
+    if (gMeme.lines[gMeme.selectedLineIdx].isSticker) {
+        gMeme.lines[gMeme.selectedLineIdx].sizeH += deff;
+        gMeme.lines[gMeme.selectedLineIdx].sizeW += deff;
         gMeme.lines[gMeme.selectedLineIdx].rectSize.width += deff;
-    }else{
-    gMeme.lines[gMeme.selectedLineIdx].size += deff;
-    gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
-    gMeme.lines[gMeme.selectedLineIdx].rectSize.height += deff;
-   }
-    renderCanvas();
-    drawRect(gMeme.lines[gMeme.selectedLineIdx]);
+    } else {
+        gMeme.lines[gMeme.selectedLineIdx].size += deff;
+        gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
+        gMeme.lines[gMeme.selectedLineIdx].rectSize.height += deff;
+    }
 }
 
 function changeAlign(align) {
-    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
+    if (gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     gMeme.lines[gMeme.selectedLineIdx].align = align;
-    if (align === 'end') {}
+    if (align === 'end') { }
     var posX = getPosXToWrite(gMeme.selectedLineIdx);
     gMeme.lines[gMeme.selectedLineIdx].x = posX;
     renderCanvas();
@@ -130,77 +168,31 @@ function changeAlign(align) {
 }
 
 function clickChangeColor() {
-    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
+    if (gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
     var elColor = document.querySelector('.color-input');
     elColor.click();
 }
 
 function clickChangeColorStroke() {
-    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
+    if (gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
     var elColor = document.querySelector('.color-input-stroke');
     elColor.click();
 }
 
-function addLineTogMeme(isEmptyLines) {
-    if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
-    var elCanvas = getgElCanvas();
-    var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
-    if (gMeme.lines.length === 0) yPos = 50;
-    gMeme.lines.push({
-        id: gIdLine++,
-        text: '',
-        size: gSizeFont,
-        align: 'center',
-        color: 'white',
-        colorStroke: 'black',
-        x: elCanvas.width / 2,
-        y: yPos,
-        rectSize: {
-            pos: { x: 0, y: yPos - gSizeFont},
-            height: 65,
-            width: elCanvas.width - 40
-        },
-        isDrag: false,
-        isSticker:false
-    })
-    if (!isEmptyLines) gMeme.selectedLineIdx = gMeme.lines.length - 1;
-}
-
-function addSticker(elSticker){
-    var elCanvas = getgElCanvas();
-    gMeme.lines.push({
-        id: gIdLine++,
-        text:'',
-        isSticker:true,
-        img:elSticker,
-        x: elCanvas.width /3,
-        y: elCanvas.height / 3,
-        sizeW: 100,
-        sizeH: 100,
-        size:100,
-        rectSize: {
-            pos: { x: elCanvas.width / 3, y: elCanvas.height / 3 },
-            height: 107,
-            width: elSticker.width +40
-        },
-    })
-    gMeme.selectedLineIdx++;
-}
-
 function saveMeme() {
     var numOfSaveImg = loadFromStorage('numOfSaveImg');
-    if(!numOfSaveImg){
-         saveToStorage('numOfSaveImg',1);
-         numOfSaveImg = 1;
-    }else{
+    if (!numOfSaveImg) {
+        saveToStorage('numOfSaveImg', 1);
+        numOfSaveImg = 1;
+    } else {
         numOfSaveImg++;
     }
     renderCanvas();
     var elCanvas = getgElCanvas();
     var imgContent = elCanvas.toDataURL();
     saveToStorage(`meme${numOfSaveImg}`, [gMeme, imgContent]);
-    saveToStorage('numOfSaveImg',numOfSaveImg);
-  document.location.href = 'myMemes2.html';
+    saveToStorage('numOfSaveImg', numOfSaveImg);
+    document.location.href = 'myMemes2.html';
 }
 
 function downloadMeme(elLink) {
@@ -224,15 +216,25 @@ function setLineDrag(isDrag) {
     gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
-function setSizeOfFont(canvasWidth){
-    if(canvasWidth > 400) gSizeFont = 50; 
-    if(canvasWidth > 350) gSizeFont = 45; 
-    else if(canvasWidth > 300) gSizeFont = 40; 
-    else gSizeFont = 35; 
+function setSizeOfFont(canvasWidth) {
+    if (canvasWidth > 400) gSizeFont = 50;
+    if (canvasWidth > 350) gSizeFont = 45;
+    else if (canvasWidth > 300) gSizeFont = 40;
+    else gSizeFont = 35;
 }
 
-function isHaveStickerInCanvas(){
+function isHaveStickerInCanvas() {
     return gMeme.lines.some(line => line.isSticker);
+}
+
+//Circle function 
+
+function createCircle(pos) {
+    gCircle = {
+        pos,
+        size: 15,
+        color: 'blue',
+    }
 }
 
 function isCircleClicked(clickedPos) {
@@ -259,7 +261,7 @@ function getgKeys() {
     return gKeys;
 }
 
-function getgSizeFont(){
+function getgSizeFont() {
     return gSizeFont;
 }
 
@@ -267,6 +269,6 @@ function getgCircle() {
     return gCircle;
 }
 
-function getgIsCircleDrag(){
+function getgIsCircleDrag() {
     return gIsCircleDrag;
 }
