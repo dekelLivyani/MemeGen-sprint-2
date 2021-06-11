@@ -35,7 +35,7 @@ function UpdateMeme(elImg) {
                 width: elCanvas.width - 40
             },
             isDrag: false
-        }]
+        }],
     }
 }
 
@@ -138,9 +138,30 @@ function addLineTogMeme(isEmptyLines) {
             height: 65,
             width: elCanvas.width - 40
         },
-        isDrag: false
+        isDrag: false,
+        isSticker:false
     })
     if (!isEmptyLines) gMeme.selectedLineIdx = gMeme.lines.length - 1;
+}
+
+function addSticker(elSticker){
+    var elCanvas = getgElCanvas();
+    gMeme.lines.push({
+        id: gIdLine++,
+        text:'',
+        isSticker:true,
+        img:elSticker,
+        x: elCanvas.width /3,
+        y: elCanvas.height / 3,
+        size:100,
+        rectSize: {
+            pos: { x: elCanvas.width / 3, y: elCanvas.height / 3 },
+            height: 107,
+            width: elSticker.width +40
+        },
+    })
+    gMeme.selectedLineIdx++;
+    console.log(gMeme.lines[gMeme.lines.length-1]);
 }
 
 function saveMeme() {

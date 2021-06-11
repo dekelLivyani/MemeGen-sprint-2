@@ -283,6 +283,15 @@ main {
     width: 1.56rem;
     height: 1.8rem;
 }
+.stickers{
+    background-color: rgba(162, 167, 180, 0.644);
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+.stickers img{
+    z-index: 10;
+    width: 60px;
+}
 
 .save,
 .download {
