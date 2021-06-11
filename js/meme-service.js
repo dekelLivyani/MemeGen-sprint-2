@@ -140,7 +140,7 @@ function saveMeme() {
     var elCanvas = getgElCanvas();
     var imgContent = elCanvas.toDataURL();
     saveToStorage(`meme${localStorage.length}`, [gMeme, imgContent]);
-    document.location = 'MyMemes.html';
+    document.location = 'MyMemes2.html';
 }
 
 function downloadMeme(elLink) {
