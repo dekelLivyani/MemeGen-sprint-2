@@ -86,20 +86,28 @@ function createImges() {
 }
 
 function setTextIngMeme(text) {
+    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) addLine();
     gMeme.lines[gMeme.selectedLineIdx].text = text;
     writeText(gMeme.selectedLineIdx);
 }
 
 function changeSize(deff) {
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
+    if(gMeme.lines[gMeme.selectedLineIdx].isSticker){
+        console.log('yes');
+        gMeme.lines[gMeme.selectedLineIdx].size += deff;
+        gMeme.lines[gMeme.selectedLineIdx].rectSize.width -=deff;
+   }else{
     gMeme.lines[gMeme.selectedLineIdx].size += deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.pos.y -= deff;
     gMeme.lines[gMeme.selectedLineIdx].rectSize.height += deff;
+   }
     renderCanvas();
     drawRect(gMeme.lines[gMeme.selectedLineIdx]);
 }
 
 function changeAlign(align) {
+    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     gMeme.lines[gMeme.selectedLineIdx].align = align;
     if (align === 'end') {}
@@ -110,11 +118,13 @@ function changeAlign(align) {
 }
 
 function clickChangeColor() {
+    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
     var elColor = document.querySelector('.color-input');
     elColor.click();
 }
 
 function clickChangeColorStroke() {
+    if(gMeme.lines[gMeme.selectedLineIdx].isSticker) return;
     var elColor = document.querySelector('.color-input-stroke');
     elColor.click();
 }

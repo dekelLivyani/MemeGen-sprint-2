@@ -7,10 +7,9 @@
 body {
     margin: 0;
     background-color: #3e4b68f3;
-    /* background-image: url('/img/backGround.png');
+    background-image: url('/img/backGround.png');
     background-repeat: no-repeat;
-    background-size: cover; */
-    background-color:red;
+    background-size: cover;
 }
 
 ul {

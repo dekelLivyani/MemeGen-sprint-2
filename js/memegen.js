@@ -72,6 +72,7 @@ function onMove(ev) {
 }
 
 function selectSticker(elSticker){
+    document.querySelector('.text-line').value = '';
     addSticker(elSticker);
     renderCanvas();
     var meme = getgMeme();
@@ -269,7 +270,7 @@ function drawRect(memeLine) {
     var x1;
     var r; 
     if(memeLine.isSticker){
-         x1 = x0 + memeLine.img.width +40;
+         x1 = x0 + memeLine.size ;
          r = 10;
     }
     else {
