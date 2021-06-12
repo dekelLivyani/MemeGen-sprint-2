@@ -173,6 +173,7 @@ function onDown(ev) {
     if (isHaveStickerInCanvas() && isCircleClicked(pos)) {
         setCircleDrag(true);
         gStartPos = pos;
+        document.body.style.cursor = 'grabbing'
     } else {
         if (!lineClick || meme.selectedLineIdx !== lineClick.id) return
         setLineDrag(true);
@@ -204,6 +205,8 @@ function onMove(ev) {
             gStartPos = pos;
             renderCanvas()
             drawRect(memeLine);
+        }else{
+            document.body.style.cursor = 'grab'
         }
     } else if (memeLine.isDrag) {
         const dx = pos.x - gStartPos.x;
@@ -212,6 +215,9 @@ function onMove(ev) {
         gStartPos = pos;
         renderCanvas()
         drawRect(memeLine);
+    }
+    if(isHaveStickerInCanvas() && !isCircleClicked(pos) && !islineClick(ev)){
+       document.body.style.cursor = 'unset'
     }
 }
 
@@ -225,8 +231,8 @@ function moveLine(memeLine, dx, dy) {
 function changeSizeSticker(memeLine, dx, dy) {
     memeLine.sizeW += dx;
     memeLine.sizeH += dy;
-    memeLine.rectSize.height += dx;
-    memeLine.rectSize.width += dy;
+    memeLine.rectSize.width += dx;
+    memeLine.rectSize.height += dy;
 }
 
 function selectSticker(elSticker) {
@@ -307,7 +313,7 @@ function drawRect(memeLine) {
     gCtx.rect(x, y, width, height + 10)
     gCtx.fillStyle = '#aab5b83d'
     gCtx.fillRect(x, y, width, height + 10)
-    gCtx.strokeStyle = 'black'
+    gCtx.strokeStyle = 'black';
     gCtx.stroke()
     if (memeLine.isSticker) {
         var posCircle = { x: x + width, y: y + memeLine.sizeH + 10 };
@@ -340,6 +346,7 @@ function trashLine() {
     meme.lines.splice(currlineIdx, 1);
     if (meme.lines.length) {
         renderCanvas()
+        changeIdLines(meme);
         if (currlineIdx) {
             drawRect(meme.lines[currlineIdx - 1])
             meme.selectedLineIdx = currlineIdx - 1;

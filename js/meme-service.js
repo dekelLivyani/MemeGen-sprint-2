@@ -46,6 +46,7 @@ function UpdateMeme(elImg) {
 
 
 function addLineTogMeme(isEmptyLines) {
+    if(isEmptyLines) gIdLine = 0;
     if (gMeme.lines.length === 1 && gMeme.lines[0].text === '') return;
     var elCanvas = getgElCanvas();
     var yPos = (gMeme.lines.length === 1) ? elCanvas.height - 20 : elCanvas.height / 2;
@@ -88,7 +89,7 @@ function addSticker(elSticker) {
             width: elSticker.width + 40
         },
     })
-    gMeme.selectedLineIdx++;
+    gMeme.selectedLineIdx = gMeme.lines[gMeme.lines.length-1].id;
 }
 
 function getPosXToWrite(lineIdx) {
@@ -135,6 +136,13 @@ function createImges() {
     gImgs.push(_createImg(['funny']));
     gImgs.push(_createImg(['politic', 'celeb']));
     gImgs.push(_createImg(['toy-story']));
+}
+
+function changeIdLines(gMeme) {
+    gMeme.lines.forEach(function(line,idx){
+        line.id =idx;
+    })
+    gIdLine = gMeme.lines.length;
 }
 
 function setTextIngMeme(text) {

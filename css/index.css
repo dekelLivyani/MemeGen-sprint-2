@@ -265,15 +265,16 @@ main {
     border: 0;
     border-radius: 0.5rem;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
-.btn:hover:after {
+.btn:hover::after{
     content: attr(data-title);
     position: absolute;
     font-size: 11px;
     font-family: verdana;
     top: -110%;
-    left: 0;
+    left: 0%;
     background: rgb(201, 222, 243);
     border: 1px solid gray;
     border-radius: 0.5rem;
