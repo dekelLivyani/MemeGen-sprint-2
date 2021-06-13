@@ -24,16 +24,14 @@
     <main>
         <div class="gallery flex align-center">
             <div class="search-img grid">
+                <div class="search-cell">
                 <input class="filter-img" type="text" placeholder="Search" oninput="filterImg(this.value)">
-                <button class="btn-gallery all" onClick="renderImgs()">All</button>
-                <button class="btn-gallery more" onClick="moreSearch()">More</button>
-                <div class="searched-show"></div>
-                <div class="upload">
-                    <button class="file-input btn-gallery"
-                        onclick="document.getElementById('getFile').click()">Upload</button>
-                    <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
-                </div>
-                <button class="add-img btn-gallery hide" onClick="addImgToGallery()">Add</button>
+                <span class="search-icon" onClick="filterImg()">&#x1F50E;&#xFE0E;</span>
+            </div>                
+            <button class="btn-gallery upload" onclick="addImgToGallery(this)">Upload</button>
+            <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
+            <div class="searched-show flex justify-center align-center"></div>
+            <button class="btn-gallery more" onClick="moreSearch()">More</button>
             </div>
             <div class="imgs-container flex"></div>
         </div>
@@ -84,10 +82,10 @@
                     </button>
                 </div>
                 <div class="stickers">
-                    <img src="img/stickers/lonely.png" onclick="selectSticker(this)" alt="">
-                    <img src="img/stickers/patrick.png" onclick="selectSticker(this)" alt="">
-                    <img src="img/stickers/pikachu.png" onclick="selectSticker(this)" alt="">
-                    <img src="img/stickers/turtle.png" onclick="selectSticker(this)" alt="">
+                    <img class="sticker" src="img/stickers/lonely.png" onclick="selectSticker(this)" alt="">
+                    <img class="sticker" src="img/stickers/patrick.png" onclick="selectSticker(this)" alt="">
+                    <img class="sticker" src="img/stickers/pikachu.png" onclick="selectSticker(this)" alt="">
+                    <img class="sticker" src="img/stickers/turtle.png" onclick="selectSticker(this)" alt="">
                 </div>
                 <div class="load-meme flex">
                     <button class="load save" onclick="saveMeme()">Save</button>

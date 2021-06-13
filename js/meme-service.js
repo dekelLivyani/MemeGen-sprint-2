@@ -14,7 +14,7 @@ function renderGlobleInService() {
     gKeysNumOfImg = localStorage.length;
     gIdImg = 0;
     gIdLine = 0;
-    gKeys = ['funny', 'celeb', 'politic', 'animal', 'baby', 'good vibes', 'crazy', 'shocked', 'lovely', 'sarcastic', 'trans', 'toy-story', 'trump'];
+    gKeys = ['Funny', 'Trump', 'Celeb', 'Politic', 'Crazy', 'Animal', 'Baby', 'Trans', 'Lovely', 'Sarcastic', 'Shocked', 'Good vibes', 'Toy story'];
 }
 
 function UpdateMeme(elImg) {
@@ -118,24 +118,24 @@ function getPosXToWrite(lineIdx) {
 
 function createImges() {
     gImgs = [];
-    gImgs.push(_createImg(['celeb', 'politic', 'trump']));
-    gImgs.push(_createImg(['animal']));
-    gImgs.push(_createImg(['animal', 'baby', 'funny', 'good vibes']));
-    gImgs.push(_createImg(['animal']));
-    gImgs.push(_createImg(['baby', 'funny']));
-    gImgs.push(_createImg(['crazy']));
-    gImgs.push(_createImg(['baby', 'shocked']));
-    gImgs.push(_createImg(['lovely']));
-    gImgs.push(_createImg(['sarcastic', 'baby', 'funny']));
-    gImgs.push(_createImg(['funny', 'celeb', 'politic', 'good vibes']));
-    gImgs.push(_createImg(['trans', 'lovely']));
-    gImgs.push(_createImg(['celeb', 'shocked']));
-    gImgs.push(_createImg(['good vibes']));
-    gImgs.push(_createImg(['shocked']));
-    gImgs.push(_createImg(['good vibes', 'celeb']));
-    gImgs.push(_createImg(['funny']));
-    gImgs.push(_createImg(['politic', 'celeb']));
-    gImgs.push(_createImg(['toy-story']));
+    gImgs.push(_createImg(['Celeb', 'Politic', 'Trump']));
+    gImgs.push(_createImg(['Animal']));
+    gImgs.push(_createImg(['Animal', 'Baby', 'Funny', 'Good vibes']));
+    gImgs.push(_createImg(['Animal']));
+    gImgs.push(_createImg(['Baby', 'Funny']));
+    gImgs.push(_createImg(['Crazy']));
+    gImgs.push(_createImg(['Baby', 'Shocked']));
+    gImgs.push(_createImg(['Lovely']));
+    gImgs.push(_createImg(['Sarcastic', 'Baby', 'Funny']));
+    gImgs.push(_createImg(['Funny', 'Celeb', 'Politic', 'Good vibes']));
+    gImgs.push(_createImg(['Trans', 'Lovely']));
+    gImgs.push(_createImg(['Celeb', 'Shocked']));
+    gImgs.push(_createImg(['Good vibes']));
+    gImgs.push(_createImg(['Shocked']));
+    gImgs.push(_createImg(['Good vibes', 'Celeb']));
+    gImgs.push(_createImg(['Funny']));
+    gImgs.push(_createImg(['Politic', 'Celeb']));
+    gImgs.push(_createImg(['Toy-story']));
 }
 
 function changeIdLines(gMeme) {
@@ -204,7 +204,7 @@ function saveMeme() {
 }
 
 function downloadMeme(elLink) {
-    renderCanvas();
+    renderCanvas(); //Chack if Need
     var elCanvas = getgElCanvas();
     const data = elCanvas.toDataURL()
     elLink.href = data

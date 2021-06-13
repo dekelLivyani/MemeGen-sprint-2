@@ -4,7 +4,6 @@ var gElCanvas;
 var gCtx;
 var gCurrSerachNum = 0;
 var gStartPos;
-var isReSize = false;
 
 
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
@@ -58,11 +57,10 @@ function renderSearches() {
     var strHTML = '';
     var keys = getgKeys();
     var keyMap = getObjMapSearches();
-    for (var i = gCurrSerachNum; i < gCurrSerachNum + 5; i++) {
+    for (var i = gCurrSerachNum; i < gCurrSerachNum + 4; i++) {
         if (!keys[i]) break;
         var size = 16 + keyMap[keys[i]] * 2 + 'px';
         strHTML += `<span class="keys" onclick="filterImg(this.innerText)" style="font-size: ${size};">${keys[i]}</span>`;
-        if (keys[i + 1] && i !== gCurrSerachNum + 4) strHTML += `<span class="border">|</span> `;
     }
     document.querySelector('.searched-show').innerHTML = strHTML;
 }
@@ -88,22 +86,32 @@ function getObjMapSearches() {
 }
 
 function filterImg(text) {
+    if(!text) text = document.querySelector('.filter-img').value;
+    console.log(text);
     text = text.toLowerCase();
     var imgs = getgImgs();
     var imgsToDisplay = imgs.filter(img =>
-        img.keywords.find(key => key.includes(text))
+        img.keywords.find(key => key.toLowerCase().includes(text))
     )
     renderImgs(imgsToDisplay);
 }
 
 function onImgInput(ev) {
     loadImageFromInput(ev, addImg);
-    document.querySelector('.add-img').classList.remove('hide');
 }
 
-function addImgToGallery() {
+function addImgToGallery(btnAddImg) {
+    if(btnAddImg.innerText === 'Upload'){
+        document.getElementById('getFile').click();
+       setTimeout(() => {
+           btnAddImg.innerText = 'Add';
+           btnAddImg.classList.add('add-img');
+    },  1000); 
+    }else {
+        btnAddImg.innerText = 'Upload';
+        btnAddImg.classList.remove('add-img');
+    }
     renderImgs();
-    document.querySelector('.add-img').classList.add('hide');
 }
 
 function loadImageFromInput(ev, onImageReady) {
