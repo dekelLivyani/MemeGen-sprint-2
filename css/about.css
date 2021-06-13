@@ -1,0 +1,41 @@
+@font-face {
+    font-family: pangolin;
+    src: url(../fonts/pangolin/Pangolin-Regular.ttf);
+}
+
+.profile{
+    background: -webkit-linear-gradient(#4f89c0, #37a870);
+    width: 550px;
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1.3rem;
+}
+
+.profile img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: 40% 50%;;
+    border-radius: 50%;
+    position: relative;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.me{
+    padding: 0 2rem 1rem;
+    font-size: 2rem;
+    position: absolute;
+    bottom:0;
+}
+.me span:nth-child(1){
+    display: block;
+}
+.me span{
+    font-family:pangolin, sans-serif;
+}

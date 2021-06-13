@@ -34,6 +34,11 @@ a {
     src: url(../fonts/poppins/Poppins-Light.ttf);
 }
 
+@font-face {
+    font-family: awesome;
+    src: url(/fonts/awesome/fa-solid-900.ttf);
+}
+
 /* layout */
 
 .flex {
@@ -151,11 +156,15 @@ main {
     float: left; 
 }
 .search-icon{
+    font-family: awesome;
+}
+
+.search-icon::after{
+    content: "\f002";
     position: absolute;
-    right: 5px;
-    bottom: 0;
+    right: 10px;
+    bottom: 3px;
     font-size: 30px;
-    transform: rotate(270deg);
     color:#37a870;
     background: -webkit-linear-gradient(#4f89c0, #37a870);
     -webkit-background-clip: text;
@@ -436,6 +445,9 @@ footer {
         opacity: 0.6;
         cursor: auto;
         pointer-events: none;
+    }
+    header{
+        border-radius: unset;
     }
     header .btn-menu {
         display: inline;

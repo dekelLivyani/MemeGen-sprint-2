@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="">
     <title>MemeGen</title>
 </head>
 
@@ -16,7 +17,7 @@
         <ul class="nav-bar flex">
             <li onclick="openGallery()">Gallery</li>
             <li><a href="myMemes2.html"> Memes </a></li>
-            <li>About </li>
+            <li><a href="about.html"> About </a></li>
         </ul>
         <button class="btn-menu" onclick="OpenMenu()">☰</button>
     </header>
@@ -26,7 +27,7 @@
             <div class="search-img grid">
                 <div class="search-cell">
                 <input class="filter-img" type="text" placeholder="Search" oninput="filterImg(this.value)">
-                <span class="search-icon" onClick="filterImg()">&#x1F50E;&#xFE0E;</span>
+                <span class="search-icon" onClick="filterImg()"><i class="fas fa-search"></i></span>
             </div>                
             <button class="btn-gallery upload" onclick="addImgToGallery(this)">Upload</button>
             <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">

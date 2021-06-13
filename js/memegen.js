@@ -194,7 +194,7 @@ function onUp(ev) {
     onClickCanvas(ev);
     setLineDrag(false);
     const pos = getEvPos(ev);
-    if (isHaveStickerInCanvas() && isCircleClicked(pos)) {
+    if (isHaveStickerInCanvas()) {
         setCircleDrag(false);
     }
     document.body.style.cursor = 'unset'
