@@ -3,6 +3,8 @@ var gImgSelect;
 
 function init() {
     renderMyMemes();
+    initLang();
+    onSetLang(getgCurrLang());
 }
 
 function renderMyMemes() {

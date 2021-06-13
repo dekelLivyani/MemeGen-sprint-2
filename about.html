@@ -9,27 +9,35 @@
 
     <title>Document</title>
 </head>
-<body>
+<body onload="init()">
     <div class="main-screen" onclick="OpenMenu()"> </div>
     <header class="flex align-center justify-between">
-        <a href="index.html">
-            <img class="logo" src="img/LOGO.png" alt="">
-        </a>
+        <a href="index.html"><img class="logo" src="img/LOGO.png" alt=""></a>
+        
         <ul class="nav-bar flex">
-            <li><a href="index.html">Gallery </a></li>
-            <li><a href="myMemes2.html"> Memes </a></li>
-            <li><a href="about.html"> About </a></li>
+            <li><a href="index.html" data-trans="gallery">Gallery</a></li>
+            <li><a href="myMemes2.html" data-trans="memes"> Memes </a></li>
+            <li><a href="about.html" data-trans="about"> About </a></li>
+            <li>
+                <select class="leng" onchange="onSetLang(this.value)">
+                    <option class="en" value="en">English</option>
+                    <option class="he" value="he">עברית</option>
+                </select>
+             </li>
         </ul>
         <button class="btn-menu" onclick="OpenMenu()">☰</button>
     </header>
     <div class="profile">
         <img src="img/me.jpg" alt="">
         <div class="me">
-             <span>My name is Dekel Livyani</span> 
-             <span>I live in Lappid </span> 
+             <span data-trans="myName">My name is Dekel Livyani</span> 
+             <span data-trans="live">I live in Lappid </span> 
             </div>
             
     </div>
-    <script src="abount.js"></script>
+    <script src="js/memegen-localstorge.js "></script>
+    <script src="js/meme-service.js "></script>
+    <script src="js/trans.js"></script>
+    <script src="js/abount.js"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ function renderGlobleInService() {
     gKeysNumOfImg = localStorage.length;
     gIdImg = 0;
     gIdLine = 0;
-    gKeys = ['Funny', 'Trump', 'Celeb', 'Politic', 'Crazy', 'Animal', 'Baby', 'Trans', 'Lovely', 'Sarcastic', 'Toy story', 'Good vibes', 'Shocked'];
+    gKeys = ['Funny', 'Trump', 'Celeb', 'Politic', 'Crazy', 'Animal', 'Baby', 'Trans', 'Lovely', 'Sarcastic', 'ToyStory', 'GoodVibes', 'Shocked'];
 }
 
 function UpdateMeme(elImg) {
@@ -120,22 +120,22 @@ function createImges() {
     gImgs = [];
     gImgs.push(_createImg(['Celeb', 'Politic', 'Trump']));
     gImgs.push(_createImg(['Animal']));
-    gImgs.push(_createImg(['Animal', 'Baby', 'Funny', 'Good vibes']));
+    gImgs.push(_createImg(['Animal', 'Baby', 'Funny', 'GoodVibes']));
     gImgs.push(_createImg(['Animal']));
     gImgs.push(_createImg(['Baby', 'Funny']));
     gImgs.push(_createImg(['Crazy']));
     gImgs.push(_createImg(['Baby', 'Shocked']));
     gImgs.push(_createImg(['Lovely']));
     gImgs.push(_createImg(['Sarcastic', 'Baby', 'Funny']));
-    gImgs.push(_createImg(['Funny', 'Celeb', 'Politic', 'Good vibes']));
+    gImgs.push(_createImg(['Funny', 'Celeb', 'Politic', 'GoodVibes']));
     gImgs.push(_createImg(['Trans', 'Lovely']));
     gImgs.push(_createImg(['Celeb', 'Shocked']));
-    gImgs.push(_createImg(['Good vibes']));
+    gImgs.push(_createImg(['GoodVibes']));
     gImgs.push(_createImg(['Shocked']));
-    gImgs.push(_createImg(['Good vibes', 'Celeb']));
+    gImgs.push(_createImg(['GoodVibes', 'Celeb']));
     gImgs.push(_createImg(['Funny']));
     gImgs.push(_createImg(['Politic', 'Celeb']));
-    gImgs.push(_createImg(['Toy-story']));
+    gImgs.push(_createImg(['ToyStory']));
 }
 
 function changeIdLines(gMeme) {
@@ -253,6 +253,13 @@ function isCircleClicked(clickedPos) {
 
 function setCircleDrag(isDrag) {
     gIsCircleDrag = isDrag
+}
+
+function onSetLang(lang) {
+    setLang(lang);
+    if (lang === 'he') document.body.classList.add('rtl');
+    else document.body.classList.remove('rtl');
+    doTrans();
 }
 
 // Get Globals Variable

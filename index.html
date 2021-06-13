@@ -14,10 +14,17 @@
     <div class="main-screen" onclick="OpenMenu()"> </div>
     <header class="flex align-center justify-between">
         <img class="logo" src="img/LOGO.png" onclick="openGallery()" alt="">
+         
         <ul class="nav-bar flex">
-            <li onclick="openGallery()">Gallery</li>
-            <li><a href="myMemes2.html"> Memes </a></li>
-            <li><a href="about.html"> About </a></li>
+            <li onclick="openGallery()" data-trans="gallery">Gallery</li>
+            <li><a href="myMemes2.html" data-trans="memes"> Memes </a></li>
+            <li><a href="about.html" data-trans="about"> About </a></li>
+            <li>  
+                <select class="leng" onchange="onSetLang(this.value)">
+                <option class="en" value="en">English</option>
+                <option class="he" value="he">עברית</option>
+            </select>
+            </li>
         </ul>
         <button class="btn-menu" onclick="OpenMenu()">☰</button>
     </header>
@@ -26,13 +33,13 @@
         <div class="gallery flex align-center">
             <div class="search-img grid">
                 <div class="search-cell">
-                <input class="filter-img" type="text" placeholder="Search" oninput="filterImg(this.value)">
-                <span class="search-icon" onClick="filterImg()"><i class="fas fa-search"></i></span>
+                <input class="filter-img" type="text" data-trans="search" placeholder="Search" oninput="filterImg(this)">
+                <span class="search-icon" onClick="filterImg()"></span>
             </div>                
-            <button class="btn-gallery upload" onclick="addImgToGallery(this)">Upload</button>
+            <button class="btn-gallery upload" onclick="addImgToGallery(this)"  data-trans="upload">Upload</button>
             <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
             <div class="searched-show flex justify-center align-center"></div>
-            <button class="btn-gallery more" onClick="moreSearch()">More</button>
+            <button class="btn-gallery more" onClick="moreSearch()" data-trans="more">More</button>
             </div>
             <div class="imgs-container flex"></div>
         </div>
@@ -41,44 +48,44 @@
                 <canvas class="canvas"></canvas>
             </div>
             <div class="editor flex align-center">
-                <input class="text-line" type="text" placeholder="Never be afraid" oninput="setTextIngMeme(this.value)">
+                <input class="text-line" type="text" data-trans="lineText" placeholder="Never be afraid" oninput="setTextIngMeme(this.value)">
                 <div class="buttons-line-1">
-                    <button class="btn" onclick="addLine()" data-title="Add Line">
+                    <button class="btn" onclick="addLine()" data-trans="addLine" data-title="Add Line">
                         <img class="icon" src="img/ICONS/add.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="trashLine()" data-title="Delete Line">
+                    <button class="btn" onclick="trashLine()" data-trans="deleteLine" data-title="Delete Line">
                         <img class="icon" src="img/ICONS/trash.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="moveLineUpOrDown(-5)" data-title="Move Up">
+                    <button class="btn" onclick="moveLineUpOrDown(-5)" data-trans="moveUp" data-title="Move Up">
                         <img class="icon" src="img/ICONS/up.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="moveLineUpOrDown(5)" data-title="Move Down">
+                    <button class="btn" onclick="moveLineUpOrDown(5)" data-trans="moveDown" data-title="Move Down">
                         <img class="icon" src="img/ICONS/down.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="switchLine()" data-title="Switch Lines">
+                    <button class="btn" onclick="switchLine()" data-trans="switchLine" data-title="Switch Lines">
                         <img class="icon" src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=" ">
                     </button>
                 </div>
                 <div class="buttons-line-2 flex justify-center">
-                    <button class="btn" onclick="changeSize(2)" data-title="Increase Size">
+                    <button class="btn" onclick="changeSize(2)" data-trans="increaseSize" data-title="Increase Size">
                         <img class="icon" src="img/ICONS/increase font-icon.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="changeSize(-2)" data-title="Decrease Size">
+                    <button class="btn" onclick="changeSize(-2)" data-trans="decreaseSize" data-title="Decrease Size">
                         <img class="icon" src="img/ICONS/decrease font-icon.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="clickChangeColor()" data-title="Text Color">
+                    <button class="btn" onclick="clickChangeColor()" data-trans="textColor" data-title="Text Color">
                         <img class="icon" src="img/ICONS/paint-board-and-brush.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="clickChangeColorStroke()" data-title="Stroke Color">
+                    <button class="btn" onclick="clickChangeColorStroke()" data-trans="strokeColor" data-title="Stroke Color">
                         <img class="icon " src="img/ICONS/text stroke.png">
                     </button>
-                    <button class="btn" onclick="changeAlign('start')" data-title="Align Left">
+                    <button class="btn" onclick="changeAlign('start')" data-trans="alignLeft" data-title="Align Left">
                         <img class="icon" src="img/ICONS/align-to-left.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="changeAlign('center')" data-title="Align Center">
+                    <button class="btn" onclick="changeAlign('center')" data-trans="alignCenter" data-title="Align Center">
                         <img class="icon" src="img/ICONS/center-text-alignment.png" alt=" ">
                     </button>
-                    <button class="btn" onclick="changeAlign('end')" data-title="Align Right">
+                    <button class="btn" onclick="changeAlign('end')" data-trans="alignRight" data-title="Align Right">
                         <img class="icon" src="img/ICONS/align-to-right.png" alt=" ">
                     </button>
                 </div>
@@ -89,11 +96,11 @@
                     <img class="sticker" src="img/stickers/turtle.png" onclick="selectSticker(this)" alt="">
                 </div>
                 <div class="load-meme flex">
-                    <button class="load save" onclick="saveMeme()">Save</button>
-                    <button class="load download"><a href="#" onclick="downloadMeme(this)"> Download</a></button>
+                    <button class="load save" onclick="saveMeme()" data-trans="save">Save</button>
+                    <button class="load download"><a href="#" onclick="downloadMeme(this)"data-trans="download"> Download</a></button>
                     <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                         <input name="img" id="imgData" type="hidden" />
-                        <button class="load publish" type="submit">Publish</button>
+                        <button class="load publish" type="submit" data-trans="publish">Publish</button>
                         <div class="share-container"></div>
                     </form>
                 </div>
@@ -104,6 +111,7 @@
     </main>
     <footer> By Dekel Livyani ©</footer>
     <script src="js/memegen-localstorge.js "></script>
+    <script src="js/trans.js"></script>
     <script src="js/meme-service.js "></script>
     <script src="js/memegen.js "></script>
     <script src="js/upLoad.service.js "></script>

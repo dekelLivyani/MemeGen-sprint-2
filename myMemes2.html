@@ -13,24 +13,30 @@
 <body onload="init()">
     <div class="main-screen" onclick="OpenMenu()"> </div>
     <header class="flex align-center justify-between">
-        <a href="index.html">
-            <img class="logo" src="img/LOGO.png" alt="">
-        </a>
+        <a href="index.html"><img class="logo" src="img/LOGO.png" alt=""></a>
         <ul class="nav-bar flex">
-            <li><a href="index.html">Gallery </a></li>
-            <li><a href="myMemes2.html"> Memes </a></li>
-            <li><a href="about.html"> About </a></li>
+            <li><a href="index.html" data-trans="gallery">Gallery</a></li>
+            <li><a href="myMemes2.html" data-trans="memes"> Memes </a></li>
+            <li><a href="about.html" data-trans="about"> About </a></li>
+            <li>
+                <select class="leng" onchange="onSetLang(this.value)">
+                    <option class="en" value="en">English</option>
+                    <option class="he" value="he">עברית</option>
+                </select>
+             </li>
         </ul>
         <button class="btn-menu" onclick="OpenMenu()">☰</button>
     </header>
     <main>
-        <button class="load download"><a href="#" onclick="downloadMeme(this)"> Download</a></button>
+        <button class="load download" data-trans="download"><a href="#" onclick="downloadMeme(this)"> Download</a></button>
         <div class="conteinter-my-memes flex"></div>
 
     </main>
     <footer> By Dekel Livyani ©</footer>
-    <script src="js/memegen-localstorge.js "></script>
-    <script src="js/myMemes.js "></script>
+    <script src="js/memegen-localstorge.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/trans.js"></script>
+    <script src="js/myMemes.js"></script>
 </body>
 
 </html>

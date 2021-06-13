@@ -17,6 +17,8 @@ function init() {
     resizeCanvas();
     addListeners();
     renderSearches();
+    initLang();
+    onSetLang(getgCurrLang());
 }
 
 function addListeners() {
@@ -60,7 +62,7 @@ function renderSearches() {
     for (var i = gCurrSerachNum; i < gCurrSerachNum + 4; i++) {
         if (!keys[i]) break;
         var size = 16 + keyMap[keys[i]] * 2 + 'px';
-        strHTML += `<span class="keys" onclick="filterImg(this.innerText)" style="font-size: ${size};">${keys[i]}</span>`;
+        strHTML += `<span class="keys" data-trans="${keys[i]}" data-value="${keys[i]}" onclick="filterImg(this)" style="font-size: ${size};">${keys[i]}</span>`;
     }
     document.querySelector('.searched-show').innerHTML = strHTML;
 }
@@ -70,6 +72,7 @@ function moreSearch() {
     gCurrSerachNum += 5;
     if (gCurrSerachNum >= keys.length) gCurrSerachNum = 0;
     renderSearches();
+    doTrans();
 }
 
 function getObjMapSearches() {
@@ -85,13 +88,14 @@ function getObjMapSearches() {
     return keyMap;
 }
 
-function filterImg(text) {
-    if(!text) text = document.querySelector('.filter-img').value;
-    console.log(text);
-    text = text.toLowerCase();
+function filterImg(elSearchWord) {
+     if(!elSearchWord) elSearchWord = document.querySelector('.filter-img').value;
+     else if(elSearchWord.value) elSearchWord = elSearchWord.value;
+     else elSearchWord = elSearchWord.dataset.value;
+    elSearchWord = elSearchWord.toLowerCase();
     var imgs = getgImgs();
     var imgsToDisplay = imgs.filter(img =>
-        img.keywords.find(key => key.toLowerCase().includes(text))
+        img.keywords.find(key => key.toLowerCase().includes(elSearchWord))
     )
     renderImgs(imgsToDisplay);
 }
@@ -101,15 +105,21 @@ function onImgInput(ev) {
 }
 
 function addImgToGallery(btnAddImg) {
-    if(btnAddImg.innerText === 'Upload'){
+    if(btnAddImg.classList.contains('upload')){
         document.getElementById('getFile').click();
        setTimeout(() => {
            btnAddImg.innerText = 'Add';
+           btnAddImg.dataset.trans = 'add';
            btnAddImg.classList.add('add-img');
-    },  1000); 
+           btnAddImg.classList.remove('upload');
+           doTrans();
+        },  1000); 
     }else {
         btnAddImg.innerText = 'Upload';
+        btnAddImg.dataset.trans = 'upload';
         btnAddImg.classList.remove('add-img');
+        btnAddImg.classList.add('upload');
+        doTrans();
     }
     renderImgs();
 }
