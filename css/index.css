@@ -526,6 +526,9 @@ footer {
     .galery-img {
         height: 190px;
     }
+    .search-img{
+        grid-template-rows: 1fr 2fr 1fr;
+    }
 }
 
 @media(max-width:430px) {

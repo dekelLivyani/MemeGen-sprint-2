@@ -14,7 +14,7 @@ function renderGlobleInService() {
     gKeysNumOfImg = localStorage.length;
     gIdImg = 0;
     gIdLine = 0;
-    gKeys = ['Funny', 'Trump', 'Celeb', 'Politic', 'Crazy', 'Animal', 'Baby', 'Trans', 'Lovely', 'Sarcastic', 'Shocked', 'Good vibes', 'Toy story'];
+    gKeys = ['Funny', 'Trump', 'Celeb', 'Politic', 'Crazy', 'Animal', 'Baby', 'Trans', 'Lovely', 'Sarcastic', 'Toy story', 'Good vibes', 'Shocked'];
 }
 
 function UpdateMeme(elImg) {
