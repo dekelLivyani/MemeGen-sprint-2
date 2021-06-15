@@ -31,6 +31,7 @@ a {
     text-decoration: unset;
 }
 
+
 /* Fonts */
 
 @font-face {
@@ -42,6 +43,7 @@ a {
     font-family: awesome;
     src: url(/fonts/awesome/fa-solid-900.ttf);
 }
+
 
 /* layout */
 
@@ -91,16 +93,16 @@ header {
     color: wheat;
     width: 100%;
     padding: 0 2rem;
-    background: linear-gradient(0.25turn, #4f89c0,#37a870);
+    background: linear-gradient(0.25turn, #4f89c0, #37a870);
 }
 
-.leng{
+.leng {
     border-radius: 10px;
     background: linear-gradient(0.25turn, #d3a8e7, #5ee9af);
     cursor: pointer;
-    border:0;
+    border: 0;
     font-size: 1rem;
-    padding: 0.4rem 1rem; 
+    padding: 0.4rem 1rem;
 }
 
 .nav-bar {
@@ -109,7 +111,7 @@ header {
     z-index: 2;
 }
 
-.nav-bar li:not(:last-child){
+.nav-bar li:not(:last-child) {
     font-weight: bold;
     cursor: pointer;
     padding: 5px 1.2rem;
@@ -118,7 +120,7 @@ header {
 .nav-bar li:hover:not(:last-child) {
     background-color: rgba(255, 255, 255, 0.842);
     border-radius: 1.2rem;
-    color:#37a870;   
+    color: #37a870;
 }
 
 .btn-menu {
@@ -130,8 +132,8 @@ header {
     font-size: 2.5rem;
     background-color: #fff;
     border-radius: 35px;
-    padding:0 9px;
-    color:#37a870; 
+    padding: 0 9px;
+    color: #37a870;
 }
 
 .logo {
@@ -156,10 +158,11 @@ main {
     margin-bottom: 1rem;
 }
 
-.search-cell{
+.search-cell {
     grid-column: 1/4;
     position: relative;
 }
+
 .filter-img {
     height: 40px;
     min-width: 10rem;
@@ -169,24 +172,17 @@ main {
     color: white;
     width: 100%;
     float: inline-start;
-    float: left; 
-}
-.search-icon{
-    font-family: awesome;
+    float: left;
 }
 
-.search-icon::after{
-    content: "\f002";
+.search-icon {
     position: absolute;
+    max-width: 30px;
     right: 10px;
     bottom: 3px;
-    font-size: 30px;
-    color:#37a870;
-    background: -webkit-linear-gradient(#4f89c0, #37a870);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
-body.rtl .search-icon::after{
+
+body.rtl .search-icon {
     right: unset;
     left: 10px;
 }
@@ -202,42 +198,42 @@ body.rtl .search-icon::after{
     grid-column: 5/-2;
 }
 
-.keys{
+.keys {
     cursor: pointer;
     margin-left: 20px;
-} 
+}
 
 .btn-gallery {
-    background: linear-gradient(0.25turn, #b1d5f7,#7ffdbe);
+    background: linear-gradient(0.25turn, #b1d5f7, #7ffdbe);
     border-radius: 1rem;
     font-size: 1.2rem;
     opacity: 0.8;
     height: 30px;
     margin-top: 5px;
-    border:0;
+    border: 0;
     justify-self: center;
 }
 
-.more{
+.more {
     grid-column: -1/-2;
     width: 80px;
 }
 
-.add-img{
+.add-img {
     width: 80px;
-    background: rgb(47, 0, 255); 
-    color:rgb(255, 255, 255);
-    border:2px solid black;
+    background: rgb(47, 0, 255);
+    color: rgb(255, 255, 255);
+    border: 2px solid black;
     animation: doAdd 0.7s;
     animation-iteration-count: infinite;
 }
 
-@keyframes doAdd{
-    from{
-        border:2px solid rgb(255, 255, 255);
+@keyframes doAdd {
+    from {
+        border: 2px solid rgb(255, 255, 255);
     }
-    to{
-        border:2px solid rgba(238, 101, 101, 0.726);
+    to {
+        border: 2px solid rgba(238, 101, 101, 0.726);
     }
 }
 
@@ -260,7 +256,7 @@ body.rtl .search-icon::after{
     opacity: .8;
 }
 
-.galery-img:hover{
+.galery-img:hover {
     opacity: 1;
 }
 
@@ -329,7 +325,12 @@ body.rtl .search-icon::after{
     position: relative;
 }
 
-.btn:hover::after{
+.color-input {
+    position: absolute;
+    bottom: 200px;
+}
+
+.btn:hover::after {
     content: attr(data-title);
     position: absolute;
     font-size: 12px;
@@ -346,23 +347,27 @@ body.rtl .search-icon::after{
     width: 1.56rem;
     height: 1.8rem;
 }
-.stickers{
+
+.stickers {
     background-color: rgba(162, 167, 180, 0.644);
     border-radius: 15px;
     padding: 10px 20px;
 }
-.stickers img{
+
+.stickers img {
     z-index: 10;
     width: 60px;
 }
-.sticker{
+
+.sticker {
     cursor: pointer;
 }
-.load-meme{
+
+.load-meme {
     gap: 5px;
 }
 
-.load{
+.load {
     border: 0;
     height: 2rem;
     border-radius: 0.4rem;
@@ -372,26 +377,28 @@ body.rtl .search-icon::after{
 }
 
 .save {
-    background-color:  #1E7CD3;
+    background-color: #1E7CD3;
     width: 4.5rem;
 }
 
-.download{
-    background-color:#8F44BB;
+.download {
+    background-color: #8F44BB;
     width: 7rem;
 }
-.publish{
+
+.publish {
     background-color: #14d40db4;
     width: 4.5rem;
 }
-.share{
+
+.share {
     background-color: #000000f8;
     padding: 6px 6px;
 }
-.share-container{
+
+.share-container {
     display: inline-block;
 }
-
 
 footer {
     border-top: 2px solid rgba(255, 255, 255, 0.527);
@@ -416,15 +423,15 @@ footer {
 @media(max-width:1020px) {
     .galery-img {
         height: 200px;
-    }    
+    }
 }
 
-@media(max-width:930px){
-    .search-img{
+@media(max-width:930px) {
+    .search-img {
         grid-template-rows: 1fr 1fr;
     }
     .search-cell {
-     grid-column: 1/-1;
+        grid-column: 1/-1;
     }
     .upload {
         grid-row: 2/3;
@@ -444,14 +451,14 @@ footer {
     .galery-img {
         height: 180px;
     }
-    .nav-bar{
-        gap:0px
+    .nav-bar {
+        gap: 0px
     }
-    .nav-bar li:not(:last-child){
+    .nav-bar li:not(:last-child) {
         padding: 5px 0.5rem
     }
-    .leng{
-        padding: 0.4rem 0.4rem; 
+    .leng {
+        padding: 0.4rem 0.4rem;
     }
 }
 
@@ -470,7 +477,7 @@ footer {
         cursor: auto;
         pointer-events: none;
     }
-    header{
+    header {
         border-radius: unset;
     }
     header .btn-menu {
@@ -496,23 +503,24 @@ footer {
         transition: transform 1s;
         padding: 0;
         margin: 0;
-        gap:30px
+        gap: 30px
     }
     .nav-bar li {
         width: 100%;
         padding: 20px;
         border-bottom: 1px solid rgb(54, 54, 54);
     }
-    .nav-bar li:first-child{
+    .nav-bar li:first-child {
         margin-top: 30px;
     }
-    .nav-bar li:last-child{
+    .nav-bar li:last-child {
         padding: 0;
     }
-    .search-img{
-        grid-template-rows: repeat(3 ,1fr);
+    .search-img {
+        grid-template-rows: repeat(3, 1fr);
     }
-    .upload,.add-img {
+    .upload,
+    .add-img {
         width: 100%;
         grid-row: 3/4;
         grid-column: 1/6;
@@ -544,7 +552,7 @@ footer {
     footer {
         font-size: 1rem;
         height: 25px;
-    }    
+    }
 }
 
 @media (max-width: 700px) {
@@ -575,7 +583,7 @@ footer {
     .galery-img {
         height: 190px;
     }
-    .search-img{
+    .search-img {
         grid-template-rows: 1fr 2fr 1fr;
     }
 }

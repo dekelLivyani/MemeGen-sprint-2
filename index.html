@@ -14,12 +14,12 @@
     <div class="main-screen" onclick="OpenMenu()"> </div>
     <header class="flex align-center justify-between">
         <img class="logo" src="img/LOGO.png" onclick="openGallery()" alt="">
-         
+
         <ul class="nav-bar flex">
             <li onclick="openGallery()" data-trans="gallery">Gallery</li>
             <li><a href="myMemes2.html" data-trans="memes"> Memes </a></li>
             <li><a href="about.html" data-trans="about"> About </a></li>
-            <li>  
+            <li>
                 <select class="leng" onchange="onSetLang(this.value)">
                 <option class="en" value="en">English</option>
                 <option class="he" value="he">עברית</option>
@@ -33,13 +33,13 @@
         <div class="gallery flex align-center">
             <div class="search-img grid">
                 <div class="search-cell">
-                <input class="filter-img" type="text" data-trans="search" placeholder="Search" oninput="filterImg(this)">
-                <span class="search-icon" onClick="filterImg()"></span>
-            </div>                
-            <button class="btn-gallery upload" onclick="addImgToGallery(this)"  data-trans="upload">Upload</button>
-            <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
-            <div class="searched-show flex justify-center align-center"></div>
-            <button class="btn-gallery more" onClick="moreSearch()" data-trans="more">More</button>
+                    <input class="filter-img" type="text" data-trans="search" placeholder="Search" oninput="filterImg(this)">
+                    <img class="search-icon" src="img/ICONS/search.png" alt="">
+                </div>
+                <button class="btn-gallery upload" onclick="addImgToGallery(this)" data-trans="upload">Upload</button>
+                <input type='file' id="getFile" class="hide" onchange="onImgInput(event)">
+                <div class="searched-show flex justify-center align-center"></div>
+                <button class="btn-gallery more" onClick="moreSearch()" data-trans="more">More</button>
             </div>
             <div class="imgs-container flex"></div>
         </div>
@@ -76,9 +76,11 @@
                     <button class="btn" onclick="clickChangeColor()" data-trans="textColor" data-title="Text Color">
                         <img class="icon" src="img/ICONS/paint-board-and-brush.png" alt=" ">
                     </button>
+                    <input class="color-input" type="color" oninput="changeColor()" hidden>
                     <button class="btn" onclick="clickChangeColorStroke()" data-trans="strokeColor" data-title="Stroke Color">
                         <img class="icon " src="img/ICONS/text stroke.png">
                     </button>
+                    <input class="color-input-stroke" type="color" oninput="changeColorStroke()" hidden>
                     <button class="btn" onclick="changeAlign('start')" data-trans="alignLeft" data-title="Align Left">
                         <img class="icon" src="img/ICONS/align-to-left.png" alt=" ">
                     </button>
@@ -106,8 +108,7 @@
                 </div>
             </div>
         </div>
-        <input class="color-input" type="color" oninput="changeColor()" hidden>
-        <input class="color-input-stroke" type="color" oninput="changeColorStroke()" hidden>
+
     </main>
     <footer> By Dekel Livyani ©</footer>
     <script src="js/memegen-localstorge.js "></script>

@@ -78,9 +78,9 @@ function moreSearch() {
 function getObjMapSearches() {
     var keyMap = {};
     var imgs = getgImgs();
-    imgs.forEach(function (img) {
+    imgs.forEach(function(img) {
         var keysInImg = img.keywords;
-        keysInImg.forEach(function (key) {
+        keysInImg.forEach(function(key) {
             if (!keyMap[key]) keyMap[key] = 0;
             keyMap[key]++;
         })
@@ -89,9 +89,9 @@ function getObjMapSearches() {
 }
 
 function filterImg(elSearchWord) {
-     if(!elSearchWord) elSearchWord = document.querySelector('.filter-img').value;
-     else if(elSearchWord.value) elSearchWord = elSearchWord.value;
-     else elSearchWord = elSearchWord.dataset.value;
+    if (!elSearchWord) elSearchWord = document.querySelector('.filter-img').value;
+    else if (elSearchWord.value) elSearchWord = elSearchWord.value;
+    else elSearchWord = elSearchWord.dataset.value;
     elSearchWord = elSearchWord.toLowerCase();
     var imgs = getgImgs();
     var imgsToDisplay = imgs.filter(img =>
@@ -105,16 +105,16 @@ function onImgInput(ev) {
 }
 
 function addImgToGallery(btnAddImg) {
-    if(btnAddImg.classList.contains('upload')){
+    if (btnAddImg.classList.contains('upload')) {
         document.getElementById('getFile').click();
-       setTimeout(() => {
-           btnAddImg.innerText = 'Add';
-           btnAddImg.dataset.trans = 'add';
-           btnAddImg.classList.add('add-img');
-           btnAddImg.classList.remove('upload');
-           doTrans();
-        },  1000); 
-    }else {
+        setTimeout(() => {
+            btnAddImg.innerText = 'Add';
+            btnAddImg.dataset.trans = 'add';
+            btnAddImg.classList.add('add-img');
+            btnAddImg.classList.remove('upload');
+            doTrans();
+        }, 1000);
+    } else {
         btnAddImg.innerText = 'Upload';
         btnAddImg.dataset.trans = 'upload';
         btnAddImg.classList.remove('add-img');
@@ -126,7 +126,7 @@ function addImgToGallery(btnAddImg) {
 
 function loadImageFromInput(ev, onImageReady) {
     var reader = new FileReader()
-    reader.onload = function (event) {
+    reader.onload = function(event) {
         var img = new Image()
         img.onload = onImageReady.bind(null, img)
         img.src = event.target.result
@@ -191,7 +191,7 @@ function onDown(ev) {
     if (isHaveStickerInCanvas() && isCircleClicked(pos)) {
         setCircleDrag(true);
         gStartPos = pos;
-        document.body.style.cursor = 'grabbing'
+        document.body.style.cursor = 'nw-resize'
     } else {
         if (!lineClick || meme.selectedLineIdx !== lineClick.id) return
         setLineDrag(true);
@@ -223,8 +223,8 @@ function onMove(ev) {
             gStartPos = pos;
             renderCanvas()
             drawRect(memeLine);
-        }else{
-            document.body.style.cursor = 'grab'
+        } else {
+            document.body.style.cursor = 'nw-resize'
         }
     } else if (memeLine.isDrag) {
         const dx = pos.x - gStartPos.x;
@@ -233,9 +233,11 @@ function onMove(ev) {
         gStartPos = pos;
         renderCanvas()
         drawRect(memeLine);
+    } else if (islineClick(ev)) {
+        document.body.style.cursor = 'grab'
     }
-    if(isHaveStickerInCanvas() && !isCircleClicked(pos) && !islineClick(ev)){
-       document.body.style.cursor = 'unset'
+    if (isHaveStickerInCanvas() && !isCircleClicked(pos) && !islineClick(ev)) {
+        document.body.style.cursor = 'unset'
     }
 }
 
